@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
  
 @Component({
   selector: 'app-usuario',
@@ -8,43 +8,53 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class UsuarioComponent {
 
-  nome: FormControl = new FormControl('', [Validators.required]);
-  dtNasc: FormControl = new FormControl('', [Validators.required]);
-  email: FormControl = new FormControl('', [Validators.required]);
-  telefone: FormControl = new FormControl('', [Validators.required]);
-  cpf: FormControl = new FormControl('', [Validators.required]);
-  endereco: FormControl = new FormControl('', [Validators.required]);
+  showSuccessMessages = false;
+  showErrorMessages = false;
+
+  formGroup = new FormGroup({
+
+  nome: new FormControl('', [Validators.required]),
+  dtNasc: new FormControl('', [Validators.required]),
+  email: new FormControl('', [Validators.required]),
+  telefone: new FormControl('', [Validators.required]),
+  cpf: new FormControl('', [Validators.required]),
+  endereco: new FormControl('', [Validators.required]),
+  });
+
 
   constructor() { }
 
     ngOnInit(): void { }
 
     salvar(): void {
-      if (this.nome.invalid) {
-        console.log('Nome Inválido!')
-        return;
-      }if (this.dtNasc.invalid) {
-        console.log('Data Inválida!')
-        return;
-      }if (this.email.invalid) {
-        console.log('E-mail Inválido!')
-        return;
-      }if (this.telefone.invalid) {
-        console.log('Telefone Inválido!')
-        return;
-      }if (this.cpf.invalid) {
-        console.log('CPF Inválido!')
-        return;
-      }if (this.endereco.invalid) {
-        console.log('Endereço Inválido!')
+      console.log('Salvando Usuário')
+
+      console.log(this.formGroup.controls.nome.invalid);
+      console.log(this.formGroup.controls.nome.touched); 
+      console.log(this.formGroup.controls.dtNasc.invalid);
+      console.log(this.formGroup.controls.dtNasc.touched); 
+      console.log(this.formGroup.controls.email.invalid);
+      console.log(this.formGroup.controls.email.touched);   
+      console.log(this.formGroup.controls.telefone.invalid);
+      console.log(this.formGroup.controls.telefone.touched);   
+      console.log(this.formGroup.controls.cpf.invalid);
+      console.log(this.formGroup.controls.cpf.touched);   
+      console.log(this.formGroup.controls.endereco.invalid);
+      console.log(this.formGroup.controls.endereco.touched);       
+
+      if (this.formGroup.invalid) {
+        console.log('Formulário Inválido!')
         return;
       }
       console.log('Salvando usuário!');
-      console.log('Nome: ' + this.nome.value);
-      console.log('Data de Nascimento: ' + this.dtNasc.value);
-      console.log('E-mail: ' + this.email.value);
-      console.log('Telefone: ' + this.telefone.value);
-      console.log('CPF: ' + this.cpf.value);
-      console.log('Endereço: ' + this.endereco.value);
+      console.log('Nome: ' + this.formGroup.controls.nome.value);
+      console.log('Data de Nascimento: ' + this.formGroup.controls.dtNasc.value);
+      console.log('E-mail: ' + this.formGroup.controls.email.value);
+      console.log('Telefone: ' + this.formGroup.controls.telefone.value);
+      console.log('CPF: ' + this.formGroup.controls.cpf.value);
+      console.log('Endereço: ' + this.formGroup.controls.endereco.value);
+    
+      console.log('Formulário válido');
+    
     }
 }

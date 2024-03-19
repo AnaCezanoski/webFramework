@@ -1,36 +1,77 @@
+<div *ngIf="showSuccessMessages" class="alert alert-success" role="alert">
+    Usuário cadastrado com sucesso!
+  </div>
+<div *ngIf="showErrorMessages" class="alert alert-danger" role="alert">
+    Erro ao cadastrar usuário!
+  </div>
+
+
 <p>Cadastro de Usuário</p>
 
-<div class="mb-3">
-    <label for="nome" class="form-label">Nome</label>
-    <input type="text" class="form-control" id="nome" placeholder="Digite seu Nome"
-    [formControl]="nome" />
-</div>
+<form [formGroup]="formGroup"> 
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" 
+        placeholder="Digite seu Nome"
+        formControlName="nome">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.nome.invalid
+        && formGroup.controls.nome.touched ? 'block' : 'none'">Digite o nome corretamente.
 
-<div class="mb-3">
-    <label for="dtNasc" class="form-label">Data de Nascimento</label>
-    <input type="date" class="form-control" id="dtNasc"
-    [formControl]="dtNasc" />
-</div>
+        </div>
+    </div>
 
-<div class="mb-3">
-    <label for="email" class="form-label">E-mail</label>
-    <input type="email" class="form-control" id="email"  placeholder="Digite seu E-mail"
-    [formControl]="email" />
-</div>
+    <div class="mb-3">
+        <label for="dtNasc" class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" id="dtNasc"
+        placeholder="Digite sua Data de Nascimento"
+        formControlName="dtNasc">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.dtNasc.invalid
+        && formGroup.controls.dtNasc.touched ? 'block' : 'none'">Digite a data corretamente.
+        </div>
+    </div>
 
-<div class="mb-3">
-    <label for="telefone" class="form-label">Telefone</label>
-    <input type="text" class="form-control" id="telefone"  placeholder="Digite seu Telefone"
-    [formControl]="telefone" />
-</div>
-<div class="mb-3">
-    <label for="cpf" class="form-label">CPF</label>
-    <input type="text" class="form-control" id="cpf"  placeholder="Digite seu CPF"
-    [formControl]="cpf" />
-</div>
-<div class="mb-3">
-    <label for="endereco" class="form-label">Endereço</label>
-    <input type="email" class="form-control" id="endereco"  placeholder="Digite seu Endereço"
-    [formControl]="endereco" />
-</div>
-<button (click)="salvar()" type="submit" class="btn btn-primary">Salvar</button>
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" id="email"
+        placeholder="Digite seu E-mail"
+        formControlName="email">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.email.invalid
+        && formGroup.controls.email.touched ? 'block' : 'none'">Digite o e-mail corretamente.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" id="telefone"  
+        placeholder="Digite seu Telefone"
+        formControlName="telefone">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.telefone.invalid
+        && formGroup.controls.telefone.touched ? 'block' : 'none'">Digite o telefone corretamente.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" id="cpf"  
+        placeholder="Digite seu CPF"
+        formControlName="cpf">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.cpf.invalid
+        && formGroup.controls.cpf.touched ? 'block' : 'none'">Digite o CPF corretamente.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="endereco" class="form-label">Endereço</label>
+        <input type="email" class="form-control" id="endereco"  
+        placeholder="Digite seu Endereço"
+        formControlName="endereco">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.endereco.invalid
+        && formGroup.controls.endereco.touched ? 'block' : 'none'">Digite o endereço corretamente.
+        </div>
+    </div>
+    <button (click)="salvar()" type="submit" class="btn btn-primary">Salvar</button>
+</form>

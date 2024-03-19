@@ -44,6 +44,8 @@ export class UsuarioComponent {
 
       if (this.formGroup.invalid) {
         console.log('Formulário Inválido!')
+        this.formGroup.markAllAsTouched();
+        this.showErrorMessages = true;
         return;
       }
       console.log('Salvando usuário!');
@@ -55,6 +57,7 @@ export class UsuarioComponent {
       console.log('Endereço: ' + this.formGroup.controls.endereco.value);
     
       console.log('Formulário válido');
-    
+      this.showSuccessMessages = true;
+
     }
 }

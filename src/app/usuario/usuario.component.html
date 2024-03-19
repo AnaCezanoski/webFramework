@@ -10,25 +10,28 @@
 
 <form [formGroup]="formGroup"> 
     <div class="mb-3">
-        <label for="nome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="nome" 
-        placeholder="Digite seu Nome"
-        formControlName="nome">
-        <div class="invalid-feedback"
-        [style.display]="formGroup.controls.nome.invalid
-        && formGroup.controls.nome.touched ? 'block' : 'none'">Digite o nome corretamente.
-
+        <div class="col-sm-5">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" 
+            placeholder="Digite seu Nome"
+            formControlName="nome">
+            <div class="invalid-feedback"
+                [style.display]="formGroup.controls.nome.invalid
+                && formGroup.controls.nome.touched ? 'block' : 'none'">Digite o nome corretamente.
+            </div>
         </div>
     </div>
 
     <div class="mb-3">
-        <label for="dtNasc" class="form-label">Data de Nascimento</label>
-        <input type="date" class="form-control" id="dtNasc"
-        placeholder="Digite sua Data de Nascimento"
-        formControlName="dtNasc">
-        <div class="invalid-feedback"
-        [style.display]="formGroup.controls.dtNasc.invalid
-        && formGroup.controls.dtNasc.touched ? 'block' : 'none'">Digite a data corretamente.
+        <div class="col-sm-5">
+            <label for="dtNasc" class="form-label">Data de Nascimento</label>
+            <input type="date" class="form-control" id="dtNasc"
+            placeholder="Digite sua Data de Nascimento"
+            formControlName="dtNasc">
+            <div class="invalid-feedback"
+            [style.display]="formGroup.controls.dtNasc.invalid
+            && formGroup.controls.dtNasc.touched ? 'block' : 'none'">Digite a data corretamente.
+            </div>
         </div>
     </div>
 

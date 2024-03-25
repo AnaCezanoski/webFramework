@@ -8,7 +8,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { JogoComponent } from './jogo/jogo.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
-import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
+import { EstoqueComponent } from './estoque/estoque.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
     JogoComponent,
     LayoutComponent,
     LoginComponent,
-    ListaUsuarioComponent
+    EstoqueComponent,
   ],
   imports: [
     BrowserModule,

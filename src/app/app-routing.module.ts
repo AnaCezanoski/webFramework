@@ -4,15 +4,16 @@ import { JogoComponent } from './jogo/jogo.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
-import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
+import { EstoqueComponent } from './estoque/estoque.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'layout', component: LayoutComponent,
     children:[
+      { path: 'estoque', component: EstoqueComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'jogo', component: JogoComponent }, 
-      { path: 'lista-usuario', component: ListaUsuarioComponent }, 
     ]
   },  
 ];

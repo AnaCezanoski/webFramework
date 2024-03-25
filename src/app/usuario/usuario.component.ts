@@ -39,8 +39,7 @@ export class UsuarioComponent {
       console.log(this.formGroup.controls.telefone.touched);   
       console.log(this.formGroup.controls.cpf.invalid);
       console.log(this.formGroup.controls.cpf.touched);   
-      console.log(this.formGroup.controls.endereco.invalid);
-      console.log(this.formGroup.controls.endereco.touched);       
+      
 
       if (this.formGroup.invalid) {
         console.log('Formulário Inválido!')
@@ -54,7 +53,6 @@ export class UsuarioComponent {
       console.log('E-mail: ' + this.formGroup.controls.email.value);
       console.log('Telefone: ' + this.formGroup.controls.telefone.value);
       console.log('CPF: ' + this.formGroup.controls.cpf.value);
-      console.log('Endereço: ' + this.formGroup.controls.endereco.value);
     
       console.log('Formulário válido');
       this.showSuccessMessages = true;

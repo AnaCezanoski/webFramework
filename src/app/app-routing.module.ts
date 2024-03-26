@@ -8,9 +8,9 @@ import { EstoqueComponent } from './estoque/estoque.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent},
   { path: 'layout', component: LayoutComponent,
     children:[
+      { path: 'login', component: LoginComponent},
       { path: 'estoque', component: EstoqueComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'jogo', component: JogoComponent }, 

@@ -13,12 +13,12 @@ export class UsuarioComponent {
 
   formGroup = new FormGroup({
 
-  nome: new FormControl('', [Validators.required]),
-  dtNasc: new FormControl('', [Validators.required]),
-  email: new FormControl('', [Validators.required]),
-  telefone: new FormControl('', [Validators.required]),
-  cpf: new FormControl('', [Validators.required]),
-  endereco: new FormControl('', [Validators.required]),
+    nome: new FormControl('', [Validators.required]),
+    dtNasc: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    telefone: new FormControl('', [Validators.required]),
+    cpf: new FormControl('', [Validators.required]),
+    endereco: new FormControl('', [Validators.required]),
   });
 
 
@@ -27,7 +27,7 @@ export class UsuarioComponent {
     ngOnInit(): void { }
 
     salvar(): void {
-      console.log('Salvando Usuário')
+      console.log('Salvando Usuário');
 
       console.log(this.formGroup.controls.nome.invalid);
       console.log(this.formGroup.controls.nome.touched); 
@@ -38,8 +38,9 @@ export class UsuarioComponent {
       console.log(this.formGroup.controls.telefone.invalid);
       console.log(this.formGroup.controls.telefone.touched);   
       console.log(this.formGroup.controls.cpf.invalid);
-      console.log(this.formGroup.controls.cpf.touched);   
-      
+      console.log(this.formGroup.controls.cpf.touched);
+      console.log(this.formGroup.controls.endereco.invalid);
+      console.log(this.formGroup.controls.endereco.touched);
 
       if (this.formGroup.invalid) {
         console.log('Formulário Inválido!')
@@ -47,15 +48,15 @@ export class UsuarioComponent {
         this.showErrorMessages = true;
         return;
       }
-      console.log('Salvando usuário!');
+
       console.log('Nome: ' + this.formGroup.controls.nome.value);
       console.log('Data de Nascimento: ' + this.formGroup.controls.dtNasc.value);
       console.log('E-mail: ' + this.formGroup.controls.email.value);
       console.log('Telefone: ' + this.formGroup.controls.telefone.value);
       console.log('CPF: ' + this.formGroup.controls.cpf.value);
+      console.log('Endereço: ' + this.formGroup.controls.endereco.value);
     
       console.log('Formulário válido');
       this.showSuccessMessages = true;
-
     }
 }

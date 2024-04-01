@@ -1,1 +1,75 @@
-<p>jogo works!</p>
+<div *ngIf="showSuccessMessages" class="alert alert-success" role="alert">
+    Jogo cadastrado com sucesso!
+</div>
+<div *ngIf="showErrorMessages" class="alert alert-danger" role="alert">
+    Erro ao cadastrar jogo!
+</div>
+
+<br>
+<h2>Cadastro de Jogo</h2>
+<br>
+<form [formGroup]="formGroup"> 
+    <div class="col-sm-6">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" 
+        placeholder="Digite o nome do jogo"
+        formControlName="nome">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.nome.invalid
+        && formGroup.controls.nome.touched ? 'block' : 'none'">Digite o nome corretamente.
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-3">
+            <label for="preco" class="form-label">Preço</label>
+            <div class="input-group">
+                <div class="input-group-text">R$</div>
+                <input type="text" class="form-control" id="preco"
+                placeholder="0.00"
+                formControlName="preco">
+            </div>
+            <div class="invalid-feedback"
+            [style.display]="formGroup.controls.preco.invalid
+            && formGroup.controls.preco.touched ? 'block' : 'none'">Digite o preço corretamente.
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <label for="categoria" class="form-label">Categoria</label>
+            <select class="form-select" aria-label="categoria" id="categoria" formGroupName="categoria">
+                <option selected spellcheck="true">Selecione a categoria do jogo</option>
+                <option value="1">Estratégia</option>
+                <option value="2">RPG</option>
+                <option value="3">Baralho</option>
+                <option value="4">Quebra-cabeça</option>
+            </select>
+            <div class="invalid-feedback"
+            [style.display]="formGroup.controls.categoria.invalid
+            && formGroup.controls.categoria.touched ? 'block' : 'none'">Selecione uma categoria.
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-sm-6">
+        <label for="desc" class="form-label">Descrição</label>
+        <textarea class="form-control" id="desc" rows="3"
+        placeholder="Digite uma descrição do jogo"
+        formControlName="desc"></textarea>
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.desc.invalid
+        && formGroup.controls.desc.touched ? 'block' : 'none'">Não deixe a descrição em branco.
+        </div>
+    </div>
+    <br>
+    <div class="col-sm-6">
+        <label for="cover" class="form-label">Imagem do jogo</label>
+        <input class="form-control" type="file" id="cover"
+        formControlName="cover">
+        <div class="invalid-feedback"
+        [style.display]="formGroup.controls.cover.invalid
+        && formGroup.controls.cover.touched ? 'block' : 'none'">Selecione uma imagem para o jogo.
+        </div>
+    </div>
+    <br>
+    <button (click)="salvar()" type="submit" class="btn btn-primary">Salvar</button>
+</form>

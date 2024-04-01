@@ -11,7 +11,7 @@ export class LoginComponent {
   constructor(private router: Router) { }
 
   login() {    
-    this.router.navigate(['/layout/produto']);
+    this.router.navigate(['/layout/estoque']);
   }
 
 }

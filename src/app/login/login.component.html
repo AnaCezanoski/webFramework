@@ -1,29 +1,28 @@
-
 <br>
 <h2>Login</h2>
 <br>
 <div class="row g-3 align-items-center">
-    <div class="col-sm-2">
-      <label for="inputPassword6" class="col-form-label">Login</label>
-    </div>
-    <div class="col-auto">
-      <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-    </div>    
+  <div class="col-sm-2">
+    <label for="email" class="col-form-label">E-mail</label>
+  </div>
+  <div class="col-auto">
+    <input type="email" id="email" class="form-control" placeholder="nome@exemplo.com">
+  </div>    
+</div>
+<br>
+<div class="row g-3 align-items-center">
+  <div class="col-sm-2">
+    <label for="senha" class="col-form-label">Senha</label>
+  </div>
+  <div class="col-auto">
+    <input type="password" id="senha" class="form-control" aria-describedby="ajudaSenha">
   </div>
   <br>
-  <div class="row g-3 align-items-center">
-    <div class="col-sm-2">
-      <label for="inputPassword6" class="col-form-label">Password</label>
-    </div>
-    <div class="col-auto">
-      <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-    </div>
-    <br>
-    <div class="col-auto">
-      <span id="passwordHelpInline" class="form-text">
-        Must be 8-20 characters long.
-      </span>
-    </div>
+  <div class="col-auto">
+    <span id="ajudaSenha" class="form-text">
+      A senha deve conter de 8-20 caracteres.
+    </span>
   </div>
-  <br>
-  <button class="btn btn-primary" (click)="login()">Login</button>
+</div>
+<br>
+<button class="btn btn-primary" (click)="login()">Login</button>

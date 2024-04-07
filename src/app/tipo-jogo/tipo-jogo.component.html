@@ -1,0 +1,40 @@
+<div *ngIf="showSuccessMessages" class="alert alert-success" role="alert">
+    Tipo cadastrado com sucesso!
+  </div>
+  <div *ngIf="showErrorMessages" class="alert alert-danger" role="alert">
+    Erro ao cadastrar tipo!
+  </div>
+
+<div class="container">
+  <h2 id="titulo">Cadastrar Tipo</h2>
+  <br>
+  <div class="container">
+  <form [formGroup]="formGroup"> 
+      <div class="col-sm">
+        <label for="tipo" class="col-form-label">Tipo</label>
+        <input type="text" id="tipo" class="form-control" aria-describedby="passwordHelpInline"
+        placeholder="Digite o tipo de jogo"
+        formControlName="tipo">
+        <div class="invalid-feedback"
+            [style.display]="formGroup.controls.tipo.invalid
+            && formGroup.controls.tipo.touched ? 'block' : 'none'">Digite o tipo corretamente.
+        </div>
+      </div>    
+    <br>
+      <div class="col-sm">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea class="form-control" id="desc" rows="3"
+        placeholder="Digite uma descrição sobre o tipo do jogo"
+        formControlName="desc"></textarea>
+        <div class="invalid-feedback"
+            [style.display]="formGroup.controls.descricao.invalid
+            && formGroup.controls.descricao.touched ? 'block' : 'none'">Digite uma descrição
+        </div>
+      </div>
+    <br>
+    <div class="button">
+      <button class="btn btn-primary" type="submit">Salvar</button>
+    </div>
+  </form>
+</div>
+</div>

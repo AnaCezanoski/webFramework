@@ -1,48 +1,26 @@
-<div *ngIf="showSuccessMessages" class="alert alert-success" role="alert">
-  Login efetuado com sucesso!
-</div>
-<div *ngIf="showErrorMessages" class="alert alert-danger" role="alert">
-  Erro ao fazer login!
-</div>
-
 <br>
-<h2>Login</h2>
+<h2 id="titulo">Fazer Login</h2>
 <br>
-<form [formGroup]="formGroup"> 
-<div class="row g-3 align-items-center">
-    <div class="col-sm-2">
-      <label for="login" class="col-form-label">Login</label>
-    </div>
-    <div class="col-auto">
-      <input type="text" id="login" class="form-control" aria-describedby="passwordHelpInline"
-      formControlName="login">
-      <div class="invalid-feedback"
-          [style.display]="formGroup.controls.login.invalid
-          && formGroup.controls.login.touched ? 'block' : 'none'">Digite o login corretamente.
-      </div>
+<div class="container">
+    <div class="col-sm">
+      <label for="email" class="col-form-label">E-mail</label>
+      <input type="email" id="email" class="form-control" aria-describedby="passwordHelpInline"
+      placeholder="nome@exemplo.com">
     </div>    
-  </div>
   <br>
-  <div class="row g-3 align-items-center">
-    <div class="col-sm-2">
+    <div class="col-sm">
       <label for="senha" class="col-form-label">Senha</label>
-    </div>
-    <div class="col-auto">
       <input type="password" id="senha" class="form-control" aria-describedby="passwordHelpInline"
-      formControlName="senha">
-      <div class="invalid-feedback"
-          [style.display]="formGroup.controls.senha.invalid
-          && formGroup.controls.senha.touched ? 'block' : 'none'">Digite a Senha corretamente.
-      </div>
+      placeholder="Digite sua Senha">
     </div>
     <br>
-
     <div class="col-auto">
       <span id="passwordHelpInline" class="form-text">
         Deve ter pelo menos 8 dígitos e 1 número.
       </span>
     </div>
-  </div>
   <br>
-  <button class="btn btn-primary" (click)="login()">Login</button>
-</form>
+  <div class="button">
+    <button class="btn btn-primary" (click)="login()">Login</button>
+  </div>
+</div>

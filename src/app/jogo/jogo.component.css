@@ -1,0 +1,19 @@
+.container {
+    width: 600px;
+    position: relative;
+    background-color: #FFF4CD;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    border: none;
+    background-color: #FB5A48;
+}
+
+#titulo {
+    text-align: center;
+}

@@ -13,6 +13,8 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 import { TipoJogoComponent } from './tipo-jogo/tipo-jogo.component';
 import { ListaTiposComponent } from './lista-tipos/lista-tipos.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { HomePageComponent } from './home-page/home-page.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()

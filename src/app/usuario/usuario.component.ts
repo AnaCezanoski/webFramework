@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UsuarioModel } from './model/usuario.model';
+import { UsuarioService } from './service/usuario.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-usuario',
@@ -20,7 +23,7 @@ export class UsuarioComponent {
     endereco: new FormControl('', [Validators.required]),
   });
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void { }
 
@@ -47,12 +50,20 @@ export class UsuarioComponent {
         return;
       }
 
-      console.log('Nome: ' + this.formGroup.controls.nome.value);
-      console.log('Data de Nascimento: ' + this.formGroup.controls.dtNasc.value);
-      console.log('E-mail: ' + this.formGroup.controls.email.value);
-      console.log('Telefone: ' + this.formGroup.controls.telefone.value);
-      console.log('CPF: ' + this.formGroup.controls.cpf.value);
-      console.log('Endereço: ' + this.formGroup.controls.endereco.value);
+
+      var usuario = new UsuarioModel();
+
+      usuario.nome = this.formGroup.controls.nome.value?.toString();
+      usuario.email = this.formGroup.controls.email.value?.toString();
+
+      this.usuarioService.salvar(usuario).subscribe(usuario => {
+        console.log('Usuário salvo com sucesso.')
+        console.log(usuario)
+        this.showSuccessMessages = true;
+      }, error => {
+        console.log(error);
+        this.showErrorMessages = true;
+      });
 
       console.log('Formulário válido');
       this.showSuccessMessages = true;

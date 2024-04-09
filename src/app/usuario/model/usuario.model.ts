@@ -1,4 +1,8 @@
 export class UsuarioModel {
     nome?: string;
-    email?:string;
+    dtNasc?: string;
+    email?: string;
+    telefone?: string;
+    cpf?: string;
+    endereco?: string;
 }

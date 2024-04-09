@@ -54,7 +54,11 @@ export class UsuarioComponent {
       var usuario = new UsuarioModel();
 
       usuario.nome = this.formGroup.controls.nome.value?.toString();
+      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
       usuario.email = this.formGroup.controls.email.value?.toString();
+      usuario.telefone = this.formGroup.controls.telefone.value?.toString();
+      usuario.cpf = this.formGroup.controls.cpf.value?.toString();
+      usuario.endereco = this.formGroup.controls.endereco.value?.toString();
 
       this.usuarioService.salvar(usuario).subscribe(usuario => {
         console.log('Usuário salvo com sucesso.')
@@ -66,6 +70,5 @@ export class UsuarioComponent {
       });
 
       console.log('Formulário válido');
-      this.showSuccessMessages = true;
     }
   }

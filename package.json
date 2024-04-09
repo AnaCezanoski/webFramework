@@ -1,5 +1,5 @@
 {
-  "name": "puc2024web",
+  "name": "BoardLend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:puc2024web": "node dist/puc2024web/server/server.mjs"
+    "serve:ssr:BoardLend": "node dist/BoardLend/server/server.mjs"
   },
   "private": true,
   "dependencies": {

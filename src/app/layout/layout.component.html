@@ -1,52 +1,49 @@
-<body>
 <nav class="navbar navbar-expand-lg navbar-dark border-bottom shadow-sm mb-3">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">BoardLend</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">BoardLend</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" [routerLink]="'/layout/home-page/'">Home</a>
       </li>
+    </ul>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">          
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Jogos
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="'/layout/estoque/'">Jogos Disponíveis</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Minha Conta
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="'/layout/usuario/'">Criar Conta</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/layout/login/'">Login</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Administrador
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" [routerLink]="'/layout/lista-tipos/'">Tipos Cadastrados</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/layout/tipo-jogo/'">Cadastrar Tipo</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/layout/estoque/'">Jogos Cadastrados</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/layout/jogo/'">Cadastrar Jogo</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/layout/lista-usuarios/'">Usúarios Cadastrados</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/layout/usuario/'">Cadastrar Usuário</a></li>
+          </ul>
+        </li>
       </ul>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Jogos
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" [routerLink]="'/layout/estoque/'">Jogos Disponíveis</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Minha Conta
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" [routerLink]="'/layout/usuario/'">Criar Conta</a></li>
-              <li><a class="dropdown-item" [routerLink]="'/layout/login/'">Login</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Administrador
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" [routerLink]="'/layout/lista-tipos/'">Tipos Cadastrados</a></li>
-              <li><a class="dropdown-item" [routerLink]="'/layout/tipo-jogo/'">Cadastrar Tipo</a></li>
-              <li><a class="dropdown-item" [routerLink]="'/layout/estoque/'">Jogos Cadastrados</a></li>
-              <li><a class="dropdown-item" [routerLink]="'/layout/jogo/'">Cadastrar Jogo</a></li>
-              <li><a class="dropdown-item" [routerLink]="'/layout/lista-usuarios/'">Usúarios Cadastrados</a></li>
-              <li><a class="dropdown-item" [routerLink]="'/layout/usuario/'">Cadastrar Usuário</a></li>
-
-            </ul>
-          </li>
-        </ul>
-      </div>
     </div>
-  </nav>
-  <br>
-  <router-outlet></router-outlet>
-</body>
+  </div>
+</nav>
+<br>
+<router-outlet></router-outlet>

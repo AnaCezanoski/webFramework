@@ -23,17 +23,17 @@
     <br>
       <div class="col-sm">
         <label for="descricao" class="form-label">Descrição</label>
-        <textarea class="form-control" id="desc" rows="3"
+        <textarea class="form-control" id="descricao" rows="3"
         placeholder="Digite uma descrição sobre o tipo do jogo"
-        formControlName="desc"></textarea>
+        formControlName="descricao"></textarea>
         <div class="invalid-feedback"
             [style.display]="formGroup.controls.descricao.invalid
-            && formGroup.controls.descricao.touched ? 'block' : 'none'">Digite uma descrição
+            && formGroup.controls.descricao.touched ? 'block' : 'none'">Digite uma descrição.
         </div>
       </div>
     <br>
     <div class="button">
-      <button class="btn btn-primary" type="submit">Salvar</button>
+      <button (click)="salvar()" type="submit" class="btn btn-primary">Salvar</button>
     </div>
   </form>
 </div>

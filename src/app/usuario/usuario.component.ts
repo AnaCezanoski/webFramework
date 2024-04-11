@@ -44,12 +44,11 @@ export class UsuarioComponent {
       console.log(this.formGroup.controls.endereco.touched);
 
       if (this.formGroup.invalid) {
-        console.log('Formulário Inválido!')
+        console.log('Formulário inválido!')
         this.formGroup.markAllAsTouched();
         this.showErrorMessages = true;
         return;
       }
-
 
       var usuario = new UsuarioModel();
 

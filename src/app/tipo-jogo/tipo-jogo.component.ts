@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TipoJogoService } from './service/tipo-jogo.service';
+import { TipoJogoModel } from './model/tipo-jogo.model';
+import { error } from 'console';
 
 @Component({
   selector: 'app-tipo-jogo',
@@ -7,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './tipo-jogo.component.css'
 })
 export class TipoJogoComponent {
+
     showSuccessMessages = false;
     showErrorMessages = false;
 
@@ -16,7 +20,7 @@ export class TipoJogoComponent {
   });
 
 
-  constructor() { }
+  constructor(private tipojogoService: TipoJogoService) { }
 
     ngOnInit(): void { }
 
@@ -29,17 +33,27 @@ export class TipoJogoComponent {
       console.log(this.formGroup.controls.descricao.touched); 
 
       if (this.formGroup.invalid) {
-        console.log('Cadastro de tipo de jogo Inválido!')
+        console.log('Formulário inválido!')
         this.formGroup.markAllAsTouched();
         this.showErrorMessages = true;
         return;
       }
 
-      console.log('Tipo: ' + this.formGroup.controls.tipo.value);
-      console.log('Descrição: ' + this.formGroup.controls.descricao.value);
+      var tipojogo = new TipoJogoModel();
+
+      tipojogo.tipo = this.formGroup.controls.tipo.value?.toString();
+      tipojogo.descricao = this.formGroup.controls.descricao.value?.toString();
     
-      console.log('Cadastro de tipo de jogo válido');
-      this.showSuccessMessages = true;
+      this.tipojogoService.salvar(tipojogo).subscribe(tipojogo => {
+        console.log('Tipo de jogo salvo com sucesso.')
+        console.log(tipojogo)
+        this.showSuccessMessages = true;
+      }, error => {
+        console.log(error);
+        this.showErrorMessages = true;
+      });
+
+      console.log('Formulário válido');
     }
 }
 

@@ -10,6 +10,6 @@ export class LoginComponent {
   constructor(private router: Router) { }
 
   login() {    
-    this.router.navigate(['/layout/estoque']);
+    this.router.navigate(['/layout/home-page']);
   }
 }

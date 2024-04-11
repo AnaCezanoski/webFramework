@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { JogoService } from './service/jogo.service';
+import { JogoModel } from './model/jogo.model';
+import { error } from 'console';
 
 @Component({
   selector: 'app-jogo',
@@ -22,7 +25,7 @@ export class JogoComponent {
   });
 
 
-  constructor() { }
+  constructor(private jogoService: JogoService) { }
 
     ngOnInit(): void { }
 
@@ -41,19 +44,29 @@ export class JogoComponent {
       console.log(this.formGroup.controls.cover.touched);
 
       if (this.formGroup.invalid) {
-        console.log('Cadastro de jogo Inválido!')
+        console.log('Formulário Inválido!')
         this.formGroup.markAllAsTouched();
         this.showErrorMessages = true;
         return;
       }
 
-      console.log('Nome: ' + this.formGroup.controls.nome.value);
-      console.log('Preço: ' + this.formGroup.controls.preco.value);
-      console.log('Categoria: ' + this.formGroup.controls.categoria.value);
-      console.log('Descrição: ' + this.formGroup.controls.desc.value);
-      console.log('Imagem de capa: ' + this.formGroup.controls.cover.value);
+      var jogo = new JogoModel();
+
+      jogo.nome = this.formGroup.controls.nome.value?.toString();
+      jogo.preco = this.formGroup.controls.preco.value?.toString();
+      jogo.categoria = this.formGroup.controls.categoria.value?.toString();
+      jogo.desc = this.formGroup.controls.desc.value?.toString();
+      jogo.cover = this.formGroup.controls.cover.value?.toString();
     
-      console.log('Cadastro de jogo válido');
-      this.showSuccessMessages = true;
+      this.jogoService.salvar(jogo).subscribe(jogo => {
+        console.log('Jogo salvo com sucesso')
+        console.log(jogo)
+        this.showSuccessMessages = true;
+      }, error => {
+        console.log(error);
+        this.showErrorMessages = true;
+      })
+
+      console.log('Formulário válido');
     }
 }

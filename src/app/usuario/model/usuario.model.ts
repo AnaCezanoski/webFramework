@@ -5,4 +5,5 @@ export class UsuarioModel {
     telefone?: string;
     cpf?: string;
     endereco?: string;
+    senha?: string;
 }

@@ -77,8 +77,33 @@
             </div>
         </div>
         <br>
+        <div class="row">
+        <div class="col-sm-6">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" 
+            placeholder="Digite uma senha"
+            formControlName="senha">
+            <div class="invalid-feedback"
+            [style.display]="formGroup.controls.senha.invalid
+            && formGroup.controls.senha.touched ? 'block' : 'none'">Digite uma senha válida.
+            </div>
+        </div>
+        <br>
+        <div class="col-sm-6">
+            <label for="confirmSenha" class="form-label">Confirmar senha</label>
+            <input type="password" class="form-control" id="confirmSenha" 
+            placeholder="Confirme sua senha"
+            formControlName="confirmSenha">
+            <div class="invalid-feedback"
+            [style.display]="formGroup.controls.confirmSenha.invalid
+            && formGroup.controls.confirmSenha.touched ? 'block' : 'none'">As senhas não são iguais.
+            </div>
+        </div>
+        </div>
+        <br>
         <div class="button">
             <button (click)="salvar()" type="submit" class="btn btn-primary">Salvar</button>
         </div>
-    </form>
+    </form>        
+    <br>
 </div>

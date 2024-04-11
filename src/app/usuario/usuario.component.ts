@@ -21,6 +21,8 @@ export class UsuarioComponent {
     telefone: new FormControl('', [Validators.required]),
     cpf: new FormControl('', [Validators.required]),
     endereco: new FormControl('', [Validators.required]),
+    senha: new FormControl('', [Validators.required]),
+    confirmSenha: new FormControl('', [Validators.required]),
   });
 
   constructor(private usuarioService: UsuarioService) { }
@@ -42,7 +44,9 @@ export class UsuarioComponent {
       console.log(this.formGroup.controls.cpf.touched);
       console.log(this.formGroup.controls.endereco.invalid);
       console.log(this.formGroup.controls.endereco.touched);
-
+      console.log(this.formGroup.controls.senha.invalid);
+      console.log(this.formGroup.controls.senha.touched);
+      
       if (this.formGroup.invalid) {
         console.log('Formulário inválido!')
         this.formGroup.markAllAsTouched();
@@ -58,6 +62,8 @@ export class UsuarioComponent {
       usuario.telefone = this.formGroup.controls.telefone.value?.toString();
       usuario.cpf = this.formGroup.controls.cpf.value?.toString();
       usuario.endereco = this.formGroup.controls.endereco.value?.toString();
+      usuario.senha = this.formGroup.controls.senha.value?.toString();
+
 
       this.usuarioService.salvar(usuario).subscribe(usuario => {
         console.log('Usuário salvo com sucesso.')

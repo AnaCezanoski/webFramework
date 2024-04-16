@@ -15,6 +15,9 @@ import { ListaTiposComponent } from './lista-tipos/lista-tipos.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { environment } from '../environment/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [
@@ -32,9 +35,11 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    RouterModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule  
   ],
   providers: [
     provideClientHydration()

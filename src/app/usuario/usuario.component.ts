@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuarioModel } from './model/usuario.model';
 import { UsuarioService } from './service/usuario.service';
-import { error } from 'console';
+import { Router } from 'express';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -14,6 +15,7 @@ export class UsuarioComponent {
   showSuccessMessages = false;
   showErrorMessages = false;
 
+  key?: string;
   formGroup = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     dtNasc: new FormControl('', [Validators.required]),
@@ -25,28 +27,20 @@ export class UsuarioComponent {
     confirmSenha: new FormControl('', [Validators.required]),
   });
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private router: ActivatedRoute ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.router.paramMap.subscribe(paramMap => {
+      this.key = paramMap.get('key')?.toString();
+      if (this.key) {
+        this.usuarioService.carregar(paramMap.get('key')).subscribe(usuario => {
+          this.formGroup.controls.nome.patchValue(usuario.nome);
+        });
+      }
+    })
+  }
 
     salvar(): void {
-      console.log('Salvando Usuário');
-
-      console.log(this.formGroup.controls.nome.invalid);
-      console.log(this.formGroup.controls.nome.touched); 
-      console.log(this.formGroup.controls.dtNasc.invalid);
-      console.log(this.formGroup.controls.dtNasc.touched); 
-      console.log(this.formGroup.controls.email.invalid);
-      console.log(this.formGroup.controls.email.touched);   
-      console.log(this.formGroup.controls.telefone.invalid);
-      console.log(this.formGroup.controls.telefone.touched);   
-      console.log(this.formGroup.controls.cpf.invalid);
-      console.log(this.formGroup.controls.cpf.touched);
-      console.log(this.formGroup.controls.endereco.invalid);
-      console.log(this.formGroup.controls.endereco.touched);
-      console.log(this.formGroup.controls.senha.invalid);
-      console.log(this.formGroup.controls.senha.touched);
-      
       if (this.formGroup.invalid) {
         console.log('Formulário inválido!')
         this.formGroup.markAllAsTouched();
@@ -54,26 +48,22 @@ export class UsuarioComponent {
         return;
       }
 
-      var usuario = new UsuarioModel();
+      if (this.key) {
 
-      usuario.nome = this.formGroup.controls.nome.value?.toString();
-      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
-      usuario.email = this.formGroup.controls.email.value?.toString();
-      usuario.telefone = this.formGroup.controls.telefone.value?.toString();
-      usuario.cpf = this.formGroup.controls.cpf.value?.toString();
-      usuario.endereco = this.formGroup.controls.endereco.value?.toString();
-      usuario.senha = this.formGroup.controls.senha.value?.toString();
+      } else {
+        var usuario = new UsuarioModel();
+        usuario.nome = this.formGroup.controls.nome.value?.toString();
+        usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
+        usuario.email = this.formGroup.controls.email.value?.toString();
+        usuario.telefone = this.formGroup.controls.telefone.value?.toString();
+        usuario.cpf = this.formGroup.controls.cpf.value?.toString();
+        usuario.endereco = this.formGroup.controls.endereco.value?.toString();
+        usuario.senha = this.formGroup.controls.senha.value?.toString();
 
-
-      this.usuarioService.salvar(usuario).subscribe(usuario => {
-        console.log('Usuário salvo com sucesso.')
-        console.log(usuario)
+      this.usuarioService.salvar(usuario).then(result => {
         this.showSuccessMessages = true;
-      }, error => {
-        console.log(error);
-        this.showErrorMessages = true;
+        console.log(result);
       });
-
-      console.log('Formulário válido');
     }
   }
+}

@@ -20,38 +20,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>João da Silva</td>
-            <td>48</td>
-            <td>joaodasilvaemail.com</td>
-            <td>88888888</td>
-            <td>12345678901</td>
-            <td>Rua OI</td>
+        <tr *ngFor="let usuario of usuarios;">
+            <th scope="row">{{usuario.key}}</th>
+            <td>{{usuario.nome}}</td>
+            <td>{{usuario.dtNasc}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.telefone}}</td>
+            <td>{{usuario.cpf}}</td>
+            <td>{{usuario.endereco}}</td>
             <td><button class="btn btn-primary">Histórico</button></td>
-            <td><button class="btn btn-primary">Editar</button></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Maria Santos</td>
-            <td>30</td>
-            <td>mariasantosemail.com</td>
-            <td>99999999</td>
-            <td>23456789012</td>
-            <td>Rua Tchau</td>
-            <td><button class="btn btn-primary">Histórico</button></td>
-            <td><button class="btn btn-primary">Editar</button></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>José Campos</td>
-            <td>27</td>
-            <td>josecamposemail.com</td>
-            <td>77777777</td>
-            <td>34567890123</td>
-            <td>Rua lalalala</td>
-            <td><button class="btn btn-primary">Histórico</button></td>
-            <td><button class="btn btn-primary">Editar</button></td>
+            <td><button (click)="carregar(usuario.key)" class="btn btn-primary">Editar</button></td>
+            <td><button (click)="excluir(usuario.key)" class="btn btn-primary">Excluir</button></td>
         </tr>
     </tbody>
 </table>

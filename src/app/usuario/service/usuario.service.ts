@@ -1,23 +1,34 @@
 import { Injectable } from '@angular/core';
 import { UsuarioModel } from '../model/usuario.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/compat/database'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private db: AngularFireDatabase) { }
 
-  salvar(usuario: UsuarioModel): Observable<UsuarioModel> {
-    return this.http.
-    post('https://boardlend-9a2d8-default-rtdb.firebaseio.com/usuario.json', usuario)
+  salvar(usuario: UsuarioModel) { 
+    return this.db.list('usuario').push(usuario);   
   }
 
-  listar(): Observable<UsuarioModel[]> {
-    return this.http.
-    get<UsuarioModel[]>('https://boardlend-9a2d8-default-rtdb.firebaseio.com/usuario.json')
+  excluir(key: any) {
+    return this.db.object('usuario/'+key).remove();
+  }
 
+  carregar(key: any) : Observable<any> {
+    return this.db.object('usuario/'+key).valueChanges();
+  }
+
+  listar() {
+    return this.db.list('usuario').snapshotChanges()
+    .pipe(
+      map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() as UsuarioModel}));
+      })
+    );
   }
 }

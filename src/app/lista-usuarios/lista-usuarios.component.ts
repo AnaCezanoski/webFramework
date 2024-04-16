@@ -3,6 +3,9 @@ import { UsuarioComponent } from '../usuario/usuario.component';
 import { UsuarioService } from '../usuario/service/usuario.service';
 import { UsuarioModel } from '../usuario/model/usuario.model';
 import { error } from 'console';
+import { map } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -11,16 +14,27 @@ import { error } from 'console';
 })
 export class ListaUsuariosComponent implements OnInit {
 
-  public usuarios: UsuarioModel[] = [];
+  public usuarios: any;
 
-  constructor(private usuarioService: UsuarioService) { }
+
+  constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
     this.usuarioService.listar().subscribe(usuarios => {
+      console.log(usuarios);      
       this.usuarios = usuarios;
-      console.log(usuarios)
-    }, error => {
-      console.error = error;
     });
+  }
+
+
+  excluir(key: any) {
+    console.log(key);
+    this.usuarioService.excluir(key).then(retorno => {
+      console.log(retorno);
+    });
+  }
+
+  carregar(key: any) {
+    this.router.navigate(['/layout/usuario/'+key]);
   }
 }

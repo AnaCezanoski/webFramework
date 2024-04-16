@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent},
       { path: 'estoque', component: EstoqueComponent },
       { path: 'usuario', component: UsuarioComponent },
+      { path: 'usuario/:key', component: UsuarioComponent },
       { path: 'jogo', component: JogoComponent }, 
       { path: 'lista-tipos', component: ListaTiposComponent }, 
       { path: 'lista-usuarios', component: ListaUsuariosComponent }, 

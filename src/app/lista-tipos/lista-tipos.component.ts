@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TipoJogoModel } from '../tipo-jogo/model/tipo-jogo.model';
 import { TipoJogoService } from '../tipo-jogo/service/tipo-jogo.service';
 import { error } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-tipos',
@@ -10,16 +11,25 @@ import { error } from 'console';
 })
 export class ListaTiposComponent implements OnInit {
 
-  public tipos: TipoJogoModel[] = [];
+  public tipos: any;
 
-  constructor(private tipojogoService: TipoJogoService) { }
+  constructor(private tipojogoService: TipoJogoService, private router: Router) { }
 
   ngOnInit(): void {
     this.tipojogoService.listar().subscribe(tipos => {
       this.tipos = tipos;
       console.log(tipos)
-    }, error => {
-      console.error = error;
-    })
+    });
+  }
+
+  excluir(key: any) {
+    console.log(key);
+    this.tipojogoService.excluir(key).then(retorno => {
+      console.log(retorno);
+    });
+  }
+
+  carregar(key: any) {
+    this.router.navigate(['/layout/tipo-jogo/'+key]);
   }
 }

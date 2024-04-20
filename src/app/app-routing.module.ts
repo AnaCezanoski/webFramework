@@ -19,10 +19,12 @@ const routes: Routes = [
       { path: 'estoque', component: EstoqueComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'usuario/:key', component: UsuarioComponent },
-      { path: 'jogo', component: JogoComponent }, 
-      { path: 'lista-tipos', component: ListaTiposComponent }, 
-      { path: 'lista-usuarios', component: ListaUsuariosComponent }, 
-      { path: 'tipo-jogo', component: TipoJogoComponent }, 
+      { path: 'jogo', component: JogoComponent },
+      { path: 'jogo/:key', component: JogoComponent},
+      { path: 'lista-tipos', component: ListaTiposComponent },
+      { path: 'lista-usuarios', component: ListaUsuariosComponent },
+      { path: 'tipo-jogo', component: TipoJogoComponent },
+      { path: 'tipo-jogo/:key', component: TipoJogoComponent},
     ]
   },  
 ];

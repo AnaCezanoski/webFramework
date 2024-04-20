@@ -40,25 +40,25 @@ export class UsuarioComponent {
     })
   }
 
-    salvar(): void {
-      if (this.formGroup.invalid) {
-        console.log('Formulário inválido!')
-        this.formGroup.markAllAsTouched();
-        this.showErrorMessages = true;
-        return;
-      }
+  salvar(): void {
+    if (this.formGroup.invalid) {
+      console.log('Formulário inválido!')
+      this.formGroup.markAllAsTouched();
+      this.showErrorMessages = true;
+      return;
+    }
 
-      if (this.key) {
+    if (this.key) {
 
-      } else {
-        var usuario = new UsuarioModel();
-        usuario.nome = this.formGroup.controls.nome.value?.toString();
-        usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
-        usuario.email = this.formGroup.controls.email.value?.toString();
-        usuario.telefone = this.formGroup.controls.telefone.value?.toString();
-        usuario.cpf = this.formGroup.controls.cpf.value?.toString();
-        usuario.endereco = this.formGroup.controls.endereco.value?.toString();
-        usuario.senha = this.formGroup.controls.senha.value?.toString();
+    } else {
+      var usuario = new UsuarioModel();
+      usuario.nome = this.formGroup.controls.nome.value?.toString();
+      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
+      usuario.email = this.formGroup.controls.email.value?.toString();
+      usuario.telefone = this.formGroup.controls.telefone.value?.toString();
+      usuario.cpf = this.formGroup.controls.cpf.value?.toString();
+      usuario.endereco = this.formGroup.controls.endereco.value?.toString();
+      usuario.senha = this.formGroup.controls.senha.value?.toString();
 
       this.usuarioService.salvar(usuario).then(result => {
         this.showSuccessMessages = true;

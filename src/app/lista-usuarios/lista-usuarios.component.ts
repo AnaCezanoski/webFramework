@@ -16,7 +16,6 @@ export class ListaUsuariosComponent implements OnInit {
 
   public usuarios: any;
 
-
   constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
@@ -25,7 +24,6 @@ export class ListaUsuariosComponent implements OnInit {
       this.usuarios = usuarios;
     });
   }
-
 
   excluir(key: any) {
     console.log(key);

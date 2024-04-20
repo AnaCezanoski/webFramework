@@ -2,40 +2,32 @@
     <form class="d-flex" role="search">
         <input class="form-control" type="search" placeholder="Procurar Jogo" aria-label="Search">
         <button class="btn btn-primary" type="submit">Pesquisar</button>
-      </form>
-    </div>
-    <br>
+    </form>
+</div>
+<br>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">Código</th>
             <th scope="col">Nome</th>
             <th scope="col">Valor</th>
-            <th scope="col">Qntd em estoque</th>
-            <th scope="col"></th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Capa</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Xadrez</td>
-            <td>R$ 15,00</td>
-            <td>6</td>
-            <td><button class="btn btn-primary">Editar</button></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Uno</td>
-            <td>R$ 8,00</td>
-            <td>10</td>
-            <td><button class="btn btn-primary">Editar</button></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>War</td>
-            <td>R$ 25,00</td>
-            <td>4</td>
-            <td><button class="btn btn-primary">Editar</button></td>
+        <tr *ngFor="let jogo of jogos;">
+            <th scope="row">{{jogo.key}}</th>
+            <td>{{jogo.nome}}</td>
+            <td>{{jogo.preco}}</td>
+            <td>{{jogo.categoria}}</td>
+            <td>{{jogo.desc}}</td>
+            <td>{{jogo.cover}}</td>
+            <td><button (click)="carregar(jogo.key)" class="btn btn-primary">Editar</button></td>
+            <td><button (click)="excluir(jogo.key)" class="btn btn-primary">Excluir</button></td>
         </tr>
     </tbody>
 </table>

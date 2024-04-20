@@ -2,36 +2,26 @@
     <form class="d-flex" role="search">
         <input class="form-control" type="search" placeholder="Procurar Tipo de Jogo" aria-label="Search">
         <button class="btn btn-primary" type="submit">Pesquisar</button>
-      </form>
-    </div>
-    <br>
+    </form>
+</div>
+<br>
 <table class="table">
-<thead>
-    <tr>
-        <th scope="col">Cód.</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Descrição</th>
-        <th scope="col"></th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Tabuleiro</td>
-        <td>É um jogo de tabuleiro..</td>
-        <td><button class="btn btn-primary">Editar</button></td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Cartas</td>
-        <td>É um jogo de cartas..</td>
-        <td><button class="btn btn-primary">Editar</button></td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Dados</td>
-        <td>É um jogo de dados..</td>
-        <td><button class="btn btn-primary">Editar</button></td>
-    </tr>
-</tbody>
+    <thead>
+        <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tipo of tipos;">
+            <th scope="row">{{tipo.key}}</th>
+            <td>{{tipo.tipo}}</td>
+            <td>{{tipo.descricao}}</td>
+            <td><button (click)="carregar(tipo.key)" class="btn btn-primary">Editar</button></td>
+            <td><button (click)="excluir(tipo.key)" class="btn btn-primary">Excluir</button></td>
+        </tr>
+    </tbody>
 </table>

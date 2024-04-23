@@ -18,6 +18,7 @@ export class UsuarioComponent {
   key?: string;
   formGroup = new FormGroup({
     nome: new FormControl('', [Validators.required]),
+    imagem: new FormControl('',[Validators.required]),
     dtNasc: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
     telefone: new FormControl('', [Validators.required]),
@@ -33,8 +34,14 @@ export class UsuarioComponent {
     this.router.paramMap.subscribe(paramMap => {
       this.key = paramMap.get('key')?.toString();
       if (this.key) {
-        this.usuarioService.carregar(paramMap.get('key')).subscribe(usuario => {
+        this.usuarioService.carregar(this.key).subscribe(usuario => {
           this.formGroup.controls.nome.patchValue(usuario.nome);
+          this.formGroup.controls.imagem.patchValue(usuario.imagem);
+          this.formGroup.controls.dtNasc.patchValue(usuario.dtNasc);
+          this.formGroup.controls.email.patchValue(usuario.email);
+          this.formGroup.controls.telefone.patchValue(usuario.telefone);
+          this.formGroup.controls.cpf.patchValue(usuario.cpf);
+          this.formGroup.controls.endereco.patchValue(usuario.endereco);
         });
       }
     })
@@ -48,18 +55,23 @@ export class UsuarioComponent {
       return;
     }
 
-    if (this.key) {
-
-    } else {
-      var usuario = new UsuarioModel();
+    var usuario = new UsuarioModel();
       usuario.nome = this.formGroup.controls.nome.value?.toString();
+      usuario.imagem = this.formGroup.controls.imagem.value?.toString();
       usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
       usuario.email = this.formGroup.controls.email.value?.toString();
       usuario.telefone = this.formGroup.controls.telefone.value?.toString();
       usuario.cpf = this.formGroup.controls.cpf.value?.toString();
       usuario.endereco = this.formGroup.controls.endereco.value?.toString();
       usuario.senha = this.formGroup.controls.senha.value?.toString();
+      
 
+    if (this.key) {
+      this.usuarioService.alterar(this.key, usuario).then(result => {
+        this.showSuccessMessages = true;
+        console.log(result);
+      });
+    } else {
       this.usuarioService.salvar(usuario).then(result => {
         this.showSuccessMessages = true;
         console.log(result);

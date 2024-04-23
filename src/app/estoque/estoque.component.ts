@@ -29,7 +29,7 @@ export class EstoqueComponent implements OnInit {
     });
   }
 
-  carregar(key: any) {
+  editar(key: any) {
     this.router.navigate(['/layout/jogo/'+key]);
   }
 }

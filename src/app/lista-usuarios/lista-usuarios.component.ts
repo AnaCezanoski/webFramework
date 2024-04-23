@@ -32,7 +32,7 @@ export class ListaUsuariosComponent implements OnInit {
     });
   }
 
-  carregar(key: any) {
+  editar(key: any) {
     this.router.navigate(['/layout/usuario/'+key]);
   }
 }

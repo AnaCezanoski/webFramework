@@ -22,12 +22,17 @@ export class UsuarioService {
   carregar(key: any) : Observable<any> {
     return this.db.object('usuario/'+key).valueChanges();
   }
+  alterar(key: any, usuario: UsuarioModel) {
+    return this.db.object('usuario/'+key).update(usuario);
+  }
 
   listar() {
     return this.db.list('usuario').snapshotChanges()
     .pipe(
       map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() as UsuarioModel}));
+        console.log(changes)
+        return changes.map(c => ({ key: c.key, 
+          ...c.payload.val() as UsuarioModel}));
       })
     );
   }

@@ -62,12 +62,12 @@
     </div>
     <br>
     <div class="col-sm">
-        <label for="cover" class="form-label">Imagem do jogo</label>
-        <input class="form-control" type="file" id="cover"
-        formControlName="cover">
+        <label for="imagem" class="form-label">Imagem do jogo</label>
+        <input class="form-control" type="text" id="imagem"
+        formControlName="imagem">
         <div class="invalid-feedback"
-        [style.display]="formGroup.controls.cover.invalid
-        && formGroup.controls.cover.touched ? 'block' : 'none'">Selecione uma imagem para o jogo.
+        [style.display]="formGroup.controls.imagem.invalid
+        && formGroup.controls.imagem.touched ? 'block' : 'none'">Selecione uma imagem para o jogo.
         </div>
     </div>
     <br>

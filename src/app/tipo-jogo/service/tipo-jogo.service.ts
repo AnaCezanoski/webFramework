@@ -23,11 +23,17 @@ export class TipoJogoService {
     return this.db.object('tipo-jogo/'+key).valueChanges();
   }
 
-  listar(): Observable<TipoJogoModel[]> {
+  alterar(key: any, tipojogo: TipoJogoModel) {
+    return this.db.object('tipo-jogo/'+key).update(tipojogo);
+  }
+
+  listar() {
     return this.db.list('tipo-jogo').snapshotChanges()
     .pipe(
       map(changes => {
-        return changes.map(c => ({key: c.payload.key, ...c.payload.val() as TipoJogoModel}));
+        console.log(changes);
+        return changes.map(c => ({ key: c.key, 
+          ...c.payload.val() as TipoJogoModel}));
       })
     );
   }

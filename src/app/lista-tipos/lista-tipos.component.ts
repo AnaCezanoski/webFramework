@@ -29,7 +29,7 @@ export class ListaTiposComponent implements OnInit {
     });
   }
 
-  carregar(key: any) {
+  editar(key: any) {
     this.router.navigate(['/layout/tipo-jogo/'+key]);
   }
 }

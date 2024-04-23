@@ -23,11 +23,17 @@ export class JogoService {
     return this.db.object('jogo/'+key).valueChanges();
   }
 
+  alterar(key: any, jogo: JogoModel) {
+    return this.db.object('jogo/'+key).update(jogo);
+  }
+
   listar() {
     return this.db.list('jogo').snapshotChanges()
     .pipe(
       map(changes => {
-        return changes.map(c => ({key: c.payload.key, ...c.payload.val() as JogoModel}));
+        console.log(changes)
+        return changes.map(c => ({key: c.key, 
+          ...c.payload.val() as JogoModel}));
       })
     );
   }

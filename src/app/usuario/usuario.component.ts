@@ -4,6 +4,7 @@ import { UsuarioModel } from './model/usuario.model';
 import { UsuarioService } from './service/usuario.service';
 import { Router } from 'express';
 import { ActivatedRoute } from '@angular/router';
+import { Console } from 'node:console';
 
 @Component({
   selector: 'app-usuario',
@@ -77,5 +78,17 @@ export class UsuarioComponent {
         console.log(result);
       });
     }
+  }
+  selectFile(event: any) {
+    console.log(event);
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+
+    this.usuarioService.uploadImagem(file).then(result => {
+      console.log(result);
+      result.ref.getDownloadURL().then(url => {
+        this.formGroup.controls.imagem.patchValue(url);
+      })
+    });
   }
 }

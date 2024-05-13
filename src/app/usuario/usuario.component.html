@@ -21,9 +21,8 @@
         </div>
         <br>
         <div class="mb-3">
-            <label for="imagem" class="form-label">Imagem</label>
-            <input type="text" class="form-control" id="imagem" 
-            placeholder="Url da imagem" formControlName="imagem">
+            <label for="imagem" class="form-label">imagem</label>
+            <input type="file" class="form-control" id="imagem" (change)="selectFile($event)">
         </div>
         <br>
         <div class="row">

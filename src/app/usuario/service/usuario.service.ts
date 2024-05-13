@@ -3,13 +3,15 @@ import { UsuarioModel } from '../model/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database'
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+  private storage: AngularFireStorage) { }
 
   salvar(usuario: UsuarioModel) { 
     return this.db.list('usuario').push(usuario);   
@@ -35,5 +37,10 @@ export class UsuarioService {
           ...c.payload.val() as UsuarioModel}));
       })
     );
+  }
+  uploadImagem(file: any) {
+    const path = 'imagens/'+file.name;
+    const ref = this.storage.ref(path);
+    return ref.put(file);
   }
 }

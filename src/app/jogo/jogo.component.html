@@ -62,12 +62,9 @@
     </div>
     <br>
     <div class="col-sm">
-        <label for="imagem" class="form-label">Imagem do jogo</label>
-        <input class="form-control" type="text" id="imagem"
-        formControlName="imagem">
-        <div class="invalid-feedback"
-        [style.display]="formGroup.controls.imagem.invalid
-        && formGroup.controls.imagem.touched ? 'block' : 'none'">Selecione uma imagem para o jogo.
+        <div class="mb-3">
+            <label for="imagem" class="form-label">imagem</label>
+            <input type="file" class="form-control" id="imagem" (change)="selectFile($event)">
         </div>
     </div>
     <br>

@@ -12,7 +12,6 @@ import { EstoqueComponent } from './estoque/estoque.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { TipoJogoComponent } from './tipo-jogo/tipo-jogo.component';
 import { ListaTiposComponent } from './lista-tipos/lista-tipos.component';
-import { HomePageComponent } from './home-page/home-page.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { environment } from '../environment/environment';
@@ -32,7 +31,6 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
     ListaUsuariosComponent,
     TipoJogoComponent,
     ListaTiposComponent,
-    HomePageComponent,
     DashboardComponent,
   ],
   imports: [

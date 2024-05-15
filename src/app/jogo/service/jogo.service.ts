@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { JogoModel } from '../model/jogo.model';
 import { Observable, map } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JogoService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+    private storage: AngularFireStorage) { }
 
   salvar(jogo: JogoModel) {
     return this.db.list('jogo').push(jogo);
@@ -36,5 +38,10 @@ export class JogoService {
           ...c.payload.val() as JogoModel}));
       })
     );
+  }
+  uploadImagem(file: any) {
+    const path = 'imagens/'+file.name;
+    const ref = this.storage.ref(path);
+    return ref.put(file);
   }
 }

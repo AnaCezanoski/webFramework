@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<div class="row">
+    <div *ngFor="let jogo of jogos;"  class="col-sm-4">
+        <div  class="card" style="width: 18rem;">
+            <img src="{{jogo.imagem}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{jogo.nome}}</h5>
+                <p class="card-text">{{jogo.desc}}</p>
+                <a href="#" class="btn btn-light">Detalhes</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,8 @@ import { JogoService } from './service/jogo.service';
 import { JogoModel } from './model/jogo.model';
 import { error } from 'console';
 import { ActivatedRoute } from '@angular/router';
+import { Console } from 'node:console';
+
 
 @Component({
   selector: 'app-jogo',
@@ -68,5 +70,17 @@ export class JogoComponent {
         console.log(result);
       });
     }
+  }
+  selectFile(event: any) {
+    console.log(event);
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+
+    this.jogoService.uploadImagem(file).then(result => {
+      console.log(result);
+      result.ref.getDownloadURL().then(url => {
+        this.formGroup.controls.imagem.patchValue(url);
+      })
+    });
   }
 }

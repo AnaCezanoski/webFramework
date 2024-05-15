@@ -8,14 +8,11 @@ import { EstoqueComponent } from './estoque/estoque.component';
 import { ListaTiposComponent } from './lista-tipos/lista-tipos.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { TipoJogoComponent } from './tipo-jogo/tipo-jogo.component';
-import { HomePageComponent } from './home-page/home-page.component';
-
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'layout', component: LayoutComponent,
     children:[
-      { path: 'home-page', component: HomePageComponent},
-      { path: 'login', component: LoginComponent},
       { path: 'estoque', component: EstoqueComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'usuario/:key', component: UsuarioComponent },
@@ -26,7 +23,13 @@ const routes: Routes = [
       { path: 'tipo-jogo', component: TipoJogoComponent },
       { path: 'tipo-jogo/:key', component: TipoJogoComponent},
     ]
-  },  
+  },        
+    { path: 'login', component: LoginComponent },
+    { path: '', component: LayoutComponent,
+    children: [
+      { path: '', component: DashboardComponent },
+    ]
+    },
 ];
 
 @NgModule({

@@ -14,19 +14,20 @@ export class LoginComponent {
   
   constructor(private router: Router,
     public afAuth: AngularFireAuth,) { }
-  realizarLogin() {
-    console.log('Login: ' + this.login.value);
-    console.log('Senha  ' + this.password.value);
-    this.afAuth
-      .signInWithEmailAndPassword(this.login.value!, this.password.value!)
-      .then((result) => {
-        console.log(result.user);
-        this.router.navigate(['/']);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
+    
+    realizarLogin() {
+      console.log('Login: ' + this.login.value);
+      console.log('Senha  ' + this.password.value);
+      this.afAuth
+        .signInWithEmailAndPassword(this.login.value!, this.password.value!)
+        .then((result) => {
+          console.log(result.user);
+          this.router.navigate(['/']);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
 
     recuperarSenha() {
       this.afAuth.sendPasswordResetEmail(this.login.value!).then(() => {

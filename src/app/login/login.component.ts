@@ -36,4 +36,14 @@ export class LoginComponent {
         window.alert(error);
       });
     }
+
+    excluirConta() {
+      this.afAuth.currentUser?.then((user) => {
+        user?.delete().then(() => {
+          window.alert('Conta excluída com secusso'); 
+        }).catch((error) => {
+          window.alert(error);
+        });
+      });
+    }
 }

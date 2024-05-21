@@ -63,8 +63,13 @@
     <br>
     <div class="col-sm">
         <div class="mb-3">
-            <label for="imagem" class="form-label">imagem</label>
-            <input type="file" class="form-control" id="imagem" (change)="selectFile($event)">
+            <label for="imagem" class="form-label">Imagem</label>
+            <input type="file" class="form-control" id="imagem" (change)="selectFile($event)"
+            formControlName="imagem">
+            <div class="invalid-feedback"
+            [style.display]="formGroup.controls.imagem.invalid
+            && formGroup.controls.imagem.touched ? 'block' : 'none'">Selecione uma imagem.
+            </div>
         </div>
     </div>
     <br>

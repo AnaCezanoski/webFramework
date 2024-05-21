@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuarioModel } from './model/usuario.model';
 import { UsuarioService } from './service/usuario.service';
-import { Router } from 'express';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Console } from 'node:console';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-usuario',
@@ -29,7 +29,8 @@ export class UsuarioComponent {
     confirmSenha: new FormControl('', [Validators.required]),
   });
 
-  constructor(private usuarioService: UsuarioService, private router: ActivatedRoute ) { }
+  constructor(private usuarioService: UsuarioService, private router: ActivatedRoute, 
+    public afAuth: AngularFireAuth, private route: Router) { }
 
   ngOnInit(): void { 
     this.router.paramMap.subscribe(paramMap => {
@@ -73,12 +74,31 @@ export class UsuarioComponent {
         console.log(result);
       });
     } else {
+      this.afAuth
+      .createUserWithEmailAndPassword(usuario.email!, usuario.senha!)
+      .then((result) => {
+        this.verificarEmail();
+        console.log(result.user)
+        this.route.navigate(['/']);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
       this.usuarioService.salvar(usuario).then(result => {
         this.showSuccessMessages = true;
         console.log(result);
       });
     }
   }
+
+  verificarEmail() {
+    this.afAuth.currentUser
+    .then((u: any) => u.sendEmailVerification())
+    .then(() => {
+      window.alert("Um email de verificação foi enviado, verifique sua caixa de entrada")
+    })
+  }
+
   selectFile(event: any) {
     console.log(event);
     console.log(event.target.files[0]);

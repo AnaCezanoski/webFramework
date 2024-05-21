@@ -13,15 +13,19 @@
       <input type="password" id="password" class="form-control"
       placeholder="Digite sua Senha" [formControl]="password">
     </div>
-    <br>
     <div class="col-auto">
       <span id="passwordHelpInline" class="form-text">
         Deve ter pelo menos 8 dígitos e 1 número.
       </span>
     </div>
+    <div class="col-auto">
+      <a href="#" onclick="recuperarSenha(event); return false;">
+        Esqueceu sua senha?
+      </a>
+    </div>
   <br>
   <div class="button">
     <button class="btn btn-primary" (click)="realizarLogin()">Login</button>&nbsp;
-    <button class="btn btn-primary" (click)="recuperarSenha()">Recupar Senha</button>  </div>
     <button class="btn btn-primary" (click)="excluirConta()">Excluir</button>
   </div>
+</div>

@@ -1,33 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { JogoService } from './service/jogo.service';
 import { JogoModel } from './model/jogo.model';
-import { error } from 'console';
 import { ActivatedRoute } from '@angular/router';
-import { Console } from 'node:console';
-
+import { TipoJogoModel } from '../tipo-jogo/model/tipo-jogo.model';
+import { TipoJogoService } from '../tipo-jogo/service/tipo-jogo.service';
 
 @Component({
   selector: 'app-jogo',
   templateUrl: './jogo.component.html',
   styleUrl: './jogo.component.css'
 })
-export class JogoComponent {
+export class JogoComponent implements OnInit {
 
   showSuccessMessages = false;
   showErrorMessages = false;
 
   key?: string;
+  tipoJogos: TipoJogoModel[] = [];
   formGroup = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     preco: new FormControl('', [Validators.required,
       Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]),
-    categoria: new FormControl(''),
+    categoria: new FormControl('', [Validators.required]),
     desc: new FormControl('', [Validators.required]),
     imagem: new FormControl('', [Validators.required]),
   });
 
-  constructor(private jogoService: JogoService, private router: ActivatedRoute) { }
+  constructor(
+    private jogoService: JogoService, 
+    private router: ActivatedRoute, 
+    private tipoJogoService: TipoJogoService
+  ) { }
 
   ngOnInit(): void {
     this.router.paramMap.subscribe(paramMap => {
@@ -41,7 +45,10 @@ export class JogoComponent {
           this.formGroup.controls.imagem.patchValue(jogo.imagem);
         });
       }
-    })
+    });
+    this.tipoJogoService.listar().subscribe(data => {
+      this.tipoJogos = data;
+    });
   }
 
   salvar(): void {

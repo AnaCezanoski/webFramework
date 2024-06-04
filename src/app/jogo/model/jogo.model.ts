@@ -5,4 +5,5 @@ export class JogoModel {
     categoria?: string;
     desc?: string;
     imagem?: string;
+    quantidade?: string;
 }

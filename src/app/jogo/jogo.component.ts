@@ -25,6 +25,7 @@ export class JogoComponent {
     categoria: new FormControl(''),
     desc: new FormControl('', [Validators.required]),
     imagem: new FormControl('', [Validators.required]),
+    quantidade: new FormControl('', [Validators.required]),
   });
 
   constructor(private jogoService: JogoService, private router: ActivatedRoute) { }
@@ -39,6 +40,7 @@ export class JogoComponent {
           this.formGroup.controls.categoria.patchValue(jogo.categoria);
           this.formGroup.controls.desc.patchValue(jogo.desc);
           this.formGroup.controls.imagem.patchValue(jogo.imagem);
+          this.formGroup.controls.quantidade.patchValue(jogo.quantidade);
         });
       }
     })
@@ -58,6 +60,7 @@ export class JogoComponent {
       jogo.categoria = this.formGroup.controls.categoria.value?.toString();
       jogo.desc = this.formGroup.controls.desc.value?.toString();
       jogo.imagem = this.formGroup.controls.imagem.value?.toString();
+      jogo.quantidade = this.formGroup.controls.quantidade.value?.toString();
 
     if (this.key) {
       this.jogoService.alterar(this.key, jogo).then(result => {

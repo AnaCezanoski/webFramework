@@ -18,4 +18,8 @@ export class DashboardComponent {
     });
   }
 
+  alugar(key: any) {
+    console.log("Alugar?")
+  }
+
 }

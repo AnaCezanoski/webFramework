@@ -13,6 +13,7 @@ export class JogoService {
   constructor(private db: AngularFireDatabase,
     private storage: AngularFireStorage) { }
 
+
   salvar(jogo: JogoModel) {
     return this.db.list('jogo').push(jogo);
   }
@@ -44,4 +45,5 @@ export class JogoService {
     const ref = this.storage.ref(path);
     return ref.put(file);
   }
+  
 }

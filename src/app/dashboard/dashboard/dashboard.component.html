@@ -5,7 +5,8 @@
             <div class="card-body">
                 <h5 class="card-title">{{jogo.nome}}</h5>
                 <p class="card-text">{{jogo.desc}}</p>
-                <a href="#" class="btn btn-light">Detalhes</a>
+                <p class="card-text">{{jogo.preco}}</p>
+                <td><button (click)="alugar(jogo.key)" class="btn btn-primary">Alugar Jogo</button></td>
             </div>
         </div>
     </div>

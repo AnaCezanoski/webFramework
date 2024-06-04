@@ -35,4 +35,6 @@ export class ListaUsuariosComponent implements OnInit {
   editar(key: any) {
     this.router.navigate(['/layout/usuario/'+key]);
   }
+
+  
 }

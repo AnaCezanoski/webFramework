@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'layout', component: LayoutComponent,
     children:[
       { path: 'estoque', component: EstoqueComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'usuario', component: UsuarioComponent },
       { path: 'usuario/:key', component: UsuarioComponent },
       { path: 'jogo', component: JogoComponent },

@@ -32,7 +32,8 @@ export class TipoJogoService {
     .pipe(
       map(changes => {
         console.log(changes);
-        return changes.map(c => ({ key: c.key, 
+        return changes.map(c => ({ 
+          key: c.key || undefined, 
           ...c.payload.val() as TipoJogoModel}));
       })
     );

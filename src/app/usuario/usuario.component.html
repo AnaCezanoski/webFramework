@@ -2,13 +2,13 @@
     Usuário cadastrado com sucesso!
 </div>
 <div *ngIf="showErrorMessages" class="alert alert-danger" role="alert">
-    Erro ao cadastrar usuário!
+    {{ errorMessage }}
 </div>
 
 <h2 id="titulo">Cadastro de Usuário</h2>
 <br>
 <div class="container">
-    <form [formGroup]="formGroup"> 
+    <form [formGroup]="formGroup" (ngSubmit)="salvar()"> 
         <div class="col-sm">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" 
@@ -87,32 +87,31 @@
             </div>
         </div>
         <br>
-        <div class="row">
-        <div class="col-sm-6">
-            <label for="senha" class="form-label">Senha</label>
-            <input type="password" class="form-control" id="senha" 
-            placeholder="Digite uma senha"
-            formControlName="senha">
-            <div class="invalid-feedback"
-            [style.display]="formGroup.controls.senha.invalid
-            && formGroup.controls.senha.touched ? 'block' : 'none'">Digite uma senha válida.
+        <div *ngIf="!isEditMode" class="row">
+            <div class="col-sm-6">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" 
+                placeholder="Digite uma senha"
+                formControlName="senha">
+                <div class="invalid-feedback"
+                [style.display]="formGroup.controls.senha.invalid
+                && formGroup.controls.senha.touched ? 'block' : 'none'">Digite uma senha válida.
+                </div>
             </div>
-        </div>
-        <br>
-        <div class="col-sm-6">
-            <label for="confirmSenha" class="form-label">Confirmar senha</label>
-            <input type="password" class="form-control" id="confirmSenha" 
-            placeholder="Confirme sua senha"
-            formControlName="confirmSenha">
-            <div class="invalid-feedback"
-            [style.display]="formGroup.controls.confirmSenha.invalid
-            && formGroup.controls.confirmSenha.touched ? 'block' : 'none'">As senhas não são iguais.
+            <div class="col-sm-6">
+                <label for="confirmSenha" class="form-label">Confirmar senha</label>
+                <input type="password" class="form-control" id="confirmSenha" 
+                placeholder="Confirme sua senha"
+                formControlName="confirmSenha">
+                <div class="invalid-feedback"
+                [style.display]="formGroup.controls.confirmSenha.invalid
+                && formGroup.controls.confirmSenha.touched ? 'block' : 'none'">Repita sua senha.
+                </div>
             </div>
-        </div>
         </div>
         <br>
         <div class="button">
-            <button (click)="salvar()" type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
     </form>        
     <br>

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuarioModel } from './model/usuario.model';
 import { UsuarioService } from './service/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Console } from 'node:console';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
@@ -15,6 +14,8 @@ export class UsuarioComponent {
 
   showSuccessMessages = false;
   showErrorMessages = false;
+  errorMessage = '';
+  isEditMode = false;
 
   key?: string;
   formGroup = new FormGroup({
@@ -36,28 +37,62 @@ export class UsuarioComponent {
     this.router.paramMap.subscribe(paramMap => {
       this.key = paramMap.get('key')?.toString();
       if (this.key) {
+        this.isEditMode = true;
         this.usuarioService.carregar(this.key).subscribe(usuario => {
-          this.formGroup.controls.nome.patchValue(usuario.nome);
-          this.formGroup.controls.imagem.patchValue(usuario.imagem);
-          this.formGroup.controls.dtNasc.patchValue(usuario.dtNasc);
-          this.formGroup.controls.email.patchValue(usuario.email);
-          this.formGroup.controls.telefone.patchValue(usuario.telefone);
-          this.formGroup.controls.cpf.patchValue(usuario.cpf);
-          this.formGroup.controls.endereco.patchValue(usuario.endereco);
+          const { senha, confirmSenha, ...controles } = this.formGroup.controls;
+          
+          const newControls = {
+            ...controles,
+            senha: new FormControl(''),
+            confirmSenha: new FormControl('')
+          };
+  
+          this.formGroup = new FormGroup(newControls);
+  
+          this.formGroup.patchValue({
+            nome: usuario.nome,
+            imagem: usuario.imagem,
+            dtNasc: usuario.dtNasc,
+            email: usuario.email,
+            telefone: usuario.telefone,
+            cpf: usuario.cpf,
+            endereco: usuario.endereco
+          });
         });
       }
     })
-  }
+  }    
 
   salvar(): void {
     if (this.formGroup.invalid) {
-      console.log('Formulário inválido!')
       this.formGroup.markAllAsTouched();
       this.showErrorMessages = true;
+      this.errorMessage = 'Formulário inválido!';
       return;
     }
 
-    var usuario = new UsuarioModel();
+    if (this.isEditMode) {
+      var usuario = new UsuarioModel();
+      usuario.nome = this.formGroup.controls.nome.value?.toString();
+      usuario.imagem = this.formGroup.controls.imagem.value?.toString();
+      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
+      usuario.email = this.formGroup.controls.email.value?.toString();
+      usuario.telefone = this.formGroup.controls.telefone.value?.toString();
+      usuario.cpf = this.formGroup.controls.cpf.value?.toString();
+      usuario.endereco = this.formGroup.controls.endereco.value?.toString();
+
+      this.usuarioService.alterar(this.key!, usuario).then(result => {
+        this.showSuccessMessages = true;
+        console.log(result);
+      });
+    } else {
+      if (this.formGroup.controls.senha.value !== this.formGroup.controls.confirmSenha.value) {
+        this.showErrorMessages = true;
+        this.errorMessage = 'As senhas não são iguais';
+        return;
+      }
+      
+      var usuario = new UsuarioModel();
       usuario.nome = this.formGroup.controls.nome.value?.toString();
       usuario.imagem = this.formGroup.controls.imagem.value?.toString();
       usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
@@ -66,27 +101,26 @@ export class UsuarioComponent {
       usuario.cpf = this.formGroup.controls.cpf.value?.toString();
       usuario.endereco = this.formGroup.controls.endereco.value?.toString();
       usuario.senha = this.formGroup.controls.senha.value?.toString();
-      
 
-    if (this.key) {
-      this.usuarioService.alterar(this.key, usuario).then(result => {
-        this.showSuccessMessages = true;
-        console.log(result);
-      });
-    } else {
-      this.afAuth
-      .createUserWithEmailAndPassword(usuario.email!, usuario.senha!)
+      this.afAuth.createUserWithEmailAndPassword(usuario.email!, usuario.senha!)
       .then((result) => {
         this.verificarEmail();
         console.log(result.user)
         this.route.navigate(['/']);
+        this.usuarioService.salvar(usuario).then(result => {
+          this.showSuccessMessages = true;
+          console.log(result);
+        });
       })
       .catch((error) => {
         console.log(error);
-      });
-      this.usuarioService.salvar(usuario).then(result => {
-        this.showSuccessMessages = true;
-        console.log(result);
+        if (error.code === 'auth/email-already-in-use') {
+          this.showErrorMessages = true;
+          this.errorMessage = 'Este e-mail já está registrado.';
+        } else {
+          this.showErrorMessages = true;
+          this.errorMessage = 'Erro ao cadastrar usuário: ' + error.message;
+        }
       });
     }
   }

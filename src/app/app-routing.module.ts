@@ -23,9 +23,9 @@ const routes: Routes = [
       { path: 'lista-usuarios', component: ListaUsuariosComponent },
       { path: 'tipo-jogo', component: TipoJogoComponent },
       { path: 'tipo-jogo/:key', component: TipoJogoComponent},
+      { path: 'login', component: LoginComponent },
     ]
   },        
-    { path: 'login', component: LoginComponent },
     { path: '', component: LayoutComponent,
     children: [
       { path: '', component: DashboardComponent },

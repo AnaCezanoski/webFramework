@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { JogoService } from '../../jogo/service/jogo.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,8 @@ import { JogoService } from '../../jogo/service/jogo.service';
 export class DashboardComponent {
   public jogos: any;
 
-  constructor(private jogoService: JogoService,) { }
+  constructor(private jogoService: JogoService, private afAuth: AngularFireAuth,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.jogoService.listar().subscribe(jogos => {
@@ -19,7 +22,12 @@ export class DashboardComponent {
   }
 
   alugar(key: any) {
-    console.log("Alugar?")
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        console.log("Alugar Jogo com key: ", key);
+      } else {
+        this.router.navigate(['layout/login']);
+      }
+    });
   }
-
 }

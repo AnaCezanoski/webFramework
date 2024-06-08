@@ -20,6 +20,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     TipoJogoComponent,
     ListaTiposComponent,
     DashboardComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,

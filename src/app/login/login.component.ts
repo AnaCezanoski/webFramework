@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -47,15 +47,5 @@ export class LoginComponent {
     } else {
       window.alert('Por favor, insira um e-mail válido.');
     }
-  }
-  
-  excluirConta() {
-    this.afAuth.currentUser?.then((user) => {
-      user?.delete().then(() => {
-        window.alert('Conta excluída com secusso'); 
-      }).catch((error) => {
-        window.alert(error);
-      });
-    });
   }
 }

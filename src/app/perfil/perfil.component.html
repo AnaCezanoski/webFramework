@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-4" *ngIf="usuario">
+            <div class="card" style="width: 18rem;">
+                <img [src]="usuario.imagem" class="card-img-top" alt="avatar">
+                <div class="card-body">
+                <h5 class="card-title">{{usuario.nome}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nascimento: {{usuario.dtNasc}}</li>
+                <li class="list-group-item">E-mail: {{usuario.email}}</li>
+                <li class="list-group-item">Telefone: {{usuario.telefone}}</li>
+                <li class="list-group-item">CPF: {{usuario.cpf}}</li>
+                <li class="list-group-item">Endereço: {{usuario.endereco}}</li>
+                </ul>
+                <div class="card-body">
+                <a href="#" class="card-link" (click)="editar($event)">Editar informações</a>
+                <a href="#" class="card-link" (click)="excluirConta($event)">Excluir conta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

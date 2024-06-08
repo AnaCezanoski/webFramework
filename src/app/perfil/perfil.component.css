@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 200px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    border: none;
+    background-color: #FB5A48;
+}
+
+#titulo {
+    text-align: center;
+}
+
+a {
+    color: #FB5A48;
+}
+
+h5 {
+    text-align: center;
+}

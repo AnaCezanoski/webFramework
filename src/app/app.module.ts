@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './usuario/usuario.component';
@@ -21,6 +20,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 @NgModule({
   declarations: [
@@ -35,11 +35,13 @@ import { PerfilComponent } from './perfil/perfil.component';
     ListaTiposComponent,
     DashboardComponent,
     PerfilComponent,
+    PedidosComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),

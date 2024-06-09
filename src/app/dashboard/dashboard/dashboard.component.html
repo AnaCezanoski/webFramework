@@ -5,8 +5,9 @@
             <div class="card-body">
                 <h5 class="card-title">{{jogo.nome}}</h5>
                 <p class="card-text">{{jogo.desc}}</p>
-                <h6 class="card-text">{{jogo.preco}}</h6>
-                <a (click)="alugar(jogo.key)" class="btn btn-primary">Alugar Jogo</a>
+                <h6 class="card-text">R$ {{jogo.preco }}</h6>
+                <p class="card-text">Quantidade em Estoque: {{ jogo.quantidade }}</p>
+                <button (click)="'/layout/pedidos'" class="btn btn-primary">Alugar Jogo</button>
             </div>
         </div>
     </div>

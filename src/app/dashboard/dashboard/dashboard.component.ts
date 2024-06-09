@@ -20,14 +20,4 @@ export class DashboardComponent {
       this.jogos = jogos;
     });
   }
-
-  alugar(key: any) {
-    this.afAuth.authState.subscribe(user => {
-      if (user) {
-        console.log("Alugar Jogo com key: ", key);
-      } else {
-        this.router.navigate(['layout/login']);
-      }
-    });
-  }
 }

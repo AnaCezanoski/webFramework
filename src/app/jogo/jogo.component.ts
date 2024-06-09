@@ -25,6 +25,7 @@ export class JogoComponent implements OnInit {
     categoria: new FormControl('', [Validators.required]),
     desc: new FormControl('', [Validators.required]),
     imagem: new FormControl('', [Validators.required]),
+    quantidade: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -43,6 +44,7 @@ export class JogoComponent implements OnInit {
           this.formGroup.controls.categoria.patchValue(jogo.categoria);
           this.formGroup.controls.desc.patchValue(jogo.desc);
           this.formGroup.controls.imagem.patchValue(jogo.imagem);
+          this.formGroup.controls.quantidade.patchValue(jogo.quantidade);
         });
       }
     });
@@ -65,6 +67,8 @@ export class JogoComponent implements OnInit {
       jogo.categoria = this.formGroup.controls.categoria.value?.toString();
       jogo.desc = this.formGroup.controls.desc.value?.toString();
       jogo.imagem = this.formGroup.controls.imagem.value?.toString();
+      jogo.quantidade = parseInt(this.formGroup.controls.quantidade.value!, 10);
+
 
     if (this.key) {
       this.jogoService.alterar(this.key, jogo).then(result => {

@@ -9,7 +9,8 @@
     <br>
     <div class="container">
         <form [formGroup]="formGroup"> 
-            <div class="col-sm">
+            <div class="row">
+                <div class="col-sm-6">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" 
                 placeholder="Digite o nome do jogo"
@@ -20,6 +21,17 @@
                 </div>
             </div>
             <br>
+            <div class="col-sm-6">
+                <label for="quantidade" class="form-label">Quantidade Disponível</label>
+                <input type="number" class="form-control" id="quantidade" 
+                placeholder="Digite a quantidade disponível"
+                formControlName="quantidade">
+                <div class="invalid-feedback"
+                [style.display]="formGroup.controls.quantidade.invalid
+                && formGroup.controls.quantidade.touched ? 'block' : 'none'">Digite a quantidade corretamente.
+                </div>
+            </div>
+        </div>
             <div class="row">
                 <div class="col-sm-6">
                     <label for="preco" class="form-label">Preço</label>

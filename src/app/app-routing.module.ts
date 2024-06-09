@@ -10,6 +10,7 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 import { TipoJogoComponent } from './tipo-jogo/tipo-jogo.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PedidosComponent } from './pedidos/pedidos.component'; 
 
 const routes: Routes = [
   { path: 'layout', component: LayoutComponent,
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'tipo-jogo/:key', component: TipoJogoComponent},
       { path: 'login', component: LoginComponent },
       { path: 'perfil', component: PerfilComponent},
+      { path: 'pedidos', component: PedidosComponent },
     ]
   },        
     { path: '', component: LayoutComponent,

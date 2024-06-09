@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>Pedidos</h1>
+    <div>
+      <label for="nomeUsuario">Nome do Usuário:</label>
+      <input type="text" id="nomeUsuario" [(ngModel)]="nomeUsuario" />
+    </div>
+    <div *ngFor="let jogo of jogos">
+      <h2>{{ jogo.nome }}</h2>
+      <p>Preço: {{ jogo.preco }}</p>
+      <p>Quantidade: {{ jogo.quantidade }}</p>
+      <button (click)="alugar(jogo)">Alugar</button>
+    </div>
+  </div>
+  

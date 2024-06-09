@@ -9,6 +9,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   providedIn: 'root'
 })
 export class JogoService {
+  paramMap: any;
 
   constructor(private db: AngularFireDatabase,
     private storage: AngularFireStorage) { }
@@ -30,16 +31,19 @@ export class JogoService {
     return this.db.object('jogo/'+key).update(jogo);
   }
 
-  listar() {
+  listar(): Observable<JogoModel[]> {
     return this.db.list('jogo').snapshotChanges()
-    .pipe(
-      map(changes => {
-        console.log(changes)
-        return changes.map(c => ({key: c.key, 
-          ...c.payload.val() as JogoModel}));
-      })
-    );
+      .pipe(
+        map(changes => {
+          return changes.map(c => {
+            const data = c.payload.val() as JogoModel;
+            const key = c.key;
+            return { ...data, key: key } as JogoModel;
+          });
+        })
+      );
   }
+  
   uploadImagem(file: any) {
     const path = 'imagens/'+file.name;
     const ref = this.storage.ref(path);

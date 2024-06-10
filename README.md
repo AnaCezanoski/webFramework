@@ -1,27 +1,36 @@
 # BoardLend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+BoardLend é uma aplicação para gerenciar aluguel de jogos de tabuleiro. Este projeto é desenvolvido em Angular e usa Firebase para backend e armazenamento.
 
-## Development server
+## Requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Certifique-se de ter instalado:
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/en/download/)
+- [Angular CLI](https://angular.io/cli)
+- [Firebase](https://firebase.google.com/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Configuração do Projeto
 
-## Build
+### 1. Clone o repositório
+git clone `https://github.com/AnaCezanoski/webFramework.git`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 2. Instale as dependências
+- Execute `npm install` no terminal do projeto.
+- Execute `npm install -g @angular/cli` para instalar o Angular.
+- Execute `npm install bootstrap` para instalar o bootstrap, um framework front-end para estruturas de CSS.
 
-## Running unit tests
+### 3. Crie o projeto e sua estrutura
+- Execute `ng new project-name` para criar o projeto Angular.
+- Execute `ng generate component component-name` para criar os componentes necessários.
+- Execute `ng generate service service-name` para criar os serviços nos componentes.
+- Crie um model para os componentes com informações e dados específicos.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 4. Configuração do Firebase
+- Adicione seu projeto no Firebase Console.
+- Adicione Firebase ao seu projeto Angular, e inicialize executando `ng add @angular/fire` no terminal.
+- Configure as credenciais do Firebase no environment do Angular.
 
-## Running end-to-end tests
+### 5. Execute o projeto
+- Execute `npm start` no terminal e acesse `http://localhost:4200` para abrir a aplicação automaticamente na web.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

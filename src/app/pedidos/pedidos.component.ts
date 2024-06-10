@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from '../pedidos/service/pedidos.service';
 import { PedidosModel } from '../pedidos/model/pedidos.model';
-import { JogoService } from '../jogo/service/jogo.service';
 import { JogoModel } from '../jogo/model/jogo.model';
+import { CarrinhoService } from '../carrinho.service';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UsuarioService } from '../usuario/service/usuario.service';
+import { UsuarioModel } from '../usuario/model/usuario.model';
 
 @Component({
   selector: 'app-pedidos',
@@ -10,59 +14,92 @@ import { JogoModel } from '../jogo/model/jogo.model';
   styleUrls: ['./pedidos.component.css']
 })
 export class PedidosComponent implements OnInit {
-  jogos: JogoModel[] = [];
-  nomeUsuario: string = '';
+
+  carrinho: JogoModel[] = [];
+  public usuario?: UsuarioModel;
 
   constructor(
     private pedidosService: PedidosService,
-    private jogoService: JogoService
+    private carrinhoService: CarrinhoService,
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private afAuth: AngularFireAuth,
   ) {}
 
   ngOnInit(): void {
-    this.jogoService.listar().subscribe({
-      next: (jogos: JogoModel[]) => {
-        this.jogos = jogos.map(jogo => ({
-          key: jogo.key ?? '',
-          nome: jogo.nome,
-          preco: jogo.preco,
-          categoria: jogo.categoria,
-          desc: jogo.desc,
-          imagem: jogo.imagem,
-          quantidade: jogo.quantidade
-        }));
-      },
-      error: (error) => {
-        console.error('Erro ao carregar jogos:', error);
-      }
-    });
+    this.carrinho = this.carrinhoService.jogos;
   }
 
-  alugar(jogo: JogoModel): void {
-    const nomeUsuario = this.nomeUsuario.trim();
-    if (nomeUsuario) {
-      const quantidade = jogo.quantidade ?? 0;
-      if (quantidade > 0) {
-        jogo.quantidade = quantidade - 1;
-        const pedido: PedidosModel = {
-          jogoKey: jogo.key,
-          nomeJogo: jogo.nome,
-          nomeUsuario: nomeUsuario,
-          data: new Date(),
-          quantidade: 1
-        };
-        this.pedidosService.registrarCompra(pedido)
-          .then(() => {
-            alert(`Compra confirmada! Obrigado, ${nomeUsuario}.`);
-          })
-          .catch(erro => {
-            console.error('Erro ao registrar compra ou atualizar estoque:', erro);
-            alert('Erro ao registrar compra ou atualizar estoque. Por favor, tente novamente.');
-          });
-      } else {
-        alert('Desculpe, este produto está fora de estoque.');
+  removerDoCarrinho(jogo: JogoModel): void {
+    this.carrinhoService.removerDoCarrinho(jogo);
+    const quantidade = jogo.quantidade ?? 0;
+          if (quantidade > 0) {
+            jogo.quantidade = quantidade + 1;
+          }
+  }
+
+  continuarAlugando(): void {
+    this.router.navigate(['/layout/dashboard'])
+  }
+
+  finalizarPedido(): void {
+    this.afAuth.authState.subscribe(user => {
+      if (!user || !user.email) {
+        console.error('Usuário não autenticado.');
+        return;
       }
-    } else {
-      alert('Por favor, insira seu nome.');
+      
+      if (this.carrinho.length === 0) {
+        alert('O carrinho está vazio.');
+        return;
+      }
+
+      this.usuarioService.getUsuarioByEmail(user.email).subscribe(usuario => {
+        if (!usuario) {
+          console.error('Usuário não encontrado.');
+          return;
+        }
+
+        const nomeUsuario = usuario.nome;
+        const total = this.calcularValorTotal();
+        const pedidoMensagem = this.carrinho
+          .map(jogo => `${jogo.quantidade} ${jogo.nome} - R$ ${(jogo.preco ?? 0).toFixed(2)}`)
+          .join('\n');
+        const mensagem = `Compra confirmada! Obrigado, ${nomeUsuario}.\n\nJogos alugados:\n${pedidoMensagem}\n\nValor total: R$ ${total.toFixed(2)}`;
+
+        for (const jogo of this.carrinho) {
+          const quantidade = jogo.quantidade ?? 0;
+          if (quantidade > 0) {
+            const pedido: PedidosModel = {
+              jogoKey: jogo.key,
+              nomeJogo: jogo.nome,
+              nomeUsuario: nomeUsuario,
+              data: new Date(),
+              quantidade: quantidade
+            };
+            jogo.quantidade = (jogo.quantidade ?? 0) - quantidade;
+
+            this.pedidosService.registrarCompra(pedido).then(() => {
+              console.log('Compra registrada:', pedido);
+            });
+          } else {
+            alert(`Desculpe, o jogo ${jogo.nome} está fora de estoque.`);
+          }
+        }
+        this.carrinhoService.limparCarrinho();
+        alert(mensagem);
+        this.router.navigate(['/layout/dashboard'])
+      });
+    }); 
+  }
+
+  calcularValorTotal(): number {
+    let total = 0;
+    for (const jogo of this.carrinho) {
+      const preco = jogo.preco ?? 0;
+      const quantidade = jogo.quantidade ?? 0;
+      total += preco * quantidade;
     }
+    return total;
   }
 }

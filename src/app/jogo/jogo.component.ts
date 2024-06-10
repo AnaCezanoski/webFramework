@@ -11,7 +11,7 @@ import { TipoJogoService } from '../tipo-jogo/service/tipo-jogo.service';
   templateUrl: './jogo.component.html',
   styleUrl: './jogo.component.css'
 })
-export class JogoComponent implements OnInit {
+export class JogoComponent implements OnInit, JogoModel {
 
   showSuccessMessages = false;
   showErrorMessages = false;
@@ -25,6 +25,7 @@ export class JogoComponent implements OnInit {
     categoria: new FormControl('', [Validators.required]),
     desc: new FormControl('', [Validators.required]),
     imagem: new FormControl('', [Validators.required]),
+    arquivo: new FormControl('', [Validators.required]),
     quantidade: new FormControl('', [Validators.required]),
   });
 
@@ -61,14 +62,14 @@ export class JogoComponent implements OnInit {
       return;
     }
   
-      var jogo = new JogoModel();
-      jogo.nome = this.formGroup.controls.nome.value?.toString();
-      jogo.preco = this.formGroup.controls.preco.value?.toString();
-      jogo.categoria = this.formGroup.controls.categoria.value?.toString();
-      jogo.desc = this.formGroup.controls.desc.value?.toString();
-      jogo.imagem = this.formGroup.controls.imagem.value?.toString();
-      jogo.quantidade = parseInt(this.formGroup.controls.quantidade.value!, 10);
-
+    const jogo: JogoModel = {
+      nome: this.formGroup.controls.nome.value?.toString(),
+      preco: parseFloat(this.formGroup.controls.preco.value!.toString()),
+      categoria: this.formGroup.controls.categoria.value?.toString(),
+      desc: this.formGroup.controls.desc.value?.toString(),
+      imagem: this.formGroup.controls.imagem.value?.toString(),
+      quantidade: parseInt(this.formGroup.controls.quantidade.value!, 10)
+    };
 
     if (this.key) {
       this.jogoService.alterar(this.key, jogo).then(result => {
@@ -82,16 +83,23 @@ export class JogoComponent implements OnInit {
       });
     }
   }
+  
   selectFile(event: any) {
     console.log(event);
-    console.log(event.target.files[0]);
     const file = event.target.files[0];
 
+    if (!file) {
+      this.formGroup.controls.arquivo.setErrors({ required: true });
+      return;
+    }
+
     this.jogoService.uploadImagem(file).then(result => {
-      console.log(result);
+      console.log(result)
       result.ref.getDownloadURL().then(url => {
         this.formGroup.controls.imagem.patchValue(url);
+        this.formGroup.controls.arquivo.setErrors(null);
+        this.formGroup.controls.arquivo.markAsTouched();
       })
-    });
+    })
   }
 }

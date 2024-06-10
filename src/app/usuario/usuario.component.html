@@ -21,16 +21,17 @@
         </div>
         <br>
         <div class="mb-3">
-            <label for="imagem" class="form-label">Imagem</label>
-            <input type="file" class="form-control" id="imagem" (change)="selectFile($event)"
-            formControlName="imagem">
+            <label for="arquivo" class="form-label">Imagem</label>
+            <input type="file" class="form-control" id="arquivo" (change)="selectFile($event)"
+            formControlName="arquivo">
+            <input type="hidden" formControlName="imagem">
             <div class="invalid-feedback"
-            [style.display]="formGroup.controls.imagem.invalid
-            && formGroup.controls.imagem.touched ? 'block' : 'none'">Selecione uma imagem.
+            [style.display]="formGroup.controls.arquivo.invalid
+            && formGroup.controls.arquivo.touched ? 'block' : 'none'">Selecione uma imagem.
             </div>
         </div>
         <br>
-        <div class="row">
+        <div class="row g-2">
             <div class="col-sm-6">
                     <label for="dtNasc" class="form-label">Data de Nascimento</label>
                     <input type="date" class="form-control" id="dtNasc"
@@ -53,7 +54,7 @@
             </div>
         </div>
         <br>
-        <div class="row">
+        <div class="row g-2">
             <div class="col-sm-6">
                 <label for="telefone" class="form-label">Telefone</label>
                 <input type="text" class="form-control" id="telefone"  
@@ -87,7 +88,7 @@
             </div>
         </div>
         <br>
-        <div *ngIf="!isEditMode" class="row">
+        <div *ngIf="!isEditMode" class="row g-2">
             <div class="col-sm-6">
                 <label for="senha" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="senha" 

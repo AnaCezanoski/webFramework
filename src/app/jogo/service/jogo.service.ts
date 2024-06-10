@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JogoModel } from '../model/jogo.model';
 import { Observable, map } from 'rxjs';
@@ -49,5 +48,8 @@ export class JogoService {
     const ref = this.storage.ref(path);
     return ref.put(file);
   }
-  
+
+  alterarQuantidadeJogo(jogoKey: string, novaQuantidade: number): Promise<void> {
+    return this.db.object(`jogo/${jogoKey}/quantidade`).set(novaQuantidade);
+  }
 }

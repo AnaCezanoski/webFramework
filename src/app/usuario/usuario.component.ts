@@ -21,8 +21,9 @@ export class UsuarioComponent {
   formGroup = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     imagem: new FormControl('',[Validators.required]),
+    arquivo: new FormControl('', [Validators.required]),
     dtNasc: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     telefone: new FormControl('', [Validators.required]),
     cpf: new FormControl('', [Validators.required]),
     endereco: new FormControl('', [Validators.required]),
@@ -75,7 +76,7 @@ export class UsuarioComponent {
       var usuario = new UsuarioModel();
       usuario.nome = this.formGroup.controls.nome.value?.toString();
       usuario.imagem = this.formGroup.controls.imagem.value?.toString();
-      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
+      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString() ? this.formataData(this.formGroup.controls.dtNasc.value?.toString()) : undefined,
       usuario.email = this.formGroup.controls.email.value?.toString();
       usuario.telefone = this.formGroup.controls.telefone.value?.toString();
       usuario.cpf = this.formGroup.controls.cpf.value?.toString();
@@ -95,8 +96,8 @@ export class UsuarioComponent {
       var usuario = new UsuarioModel();
       usuario.nome = this.formGroup.controls.nome.value?.toString();
       usuario.imagem = this.formGroup.controls.imagem.value?.toString();
-      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString();
-      usuario.email = this.formGroup.controls.email.value?.toString();
+      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString(),
+      usuario.dtNasc = this.formGroup.controls.dtNasc.value?.toString() ? this.formataData(this.formGroup.controls.dtNasc.value?.toString()) : undefined,
       usuario.telefone = this.formGroup.controls.telefone.value?.toString();
       usuario.cpf = this.formGroup.controls.cpf.value?.toString();
       usuario.endereco = this.formGroup.controls.endereco.value?.toString();
@@ -106,7 +107,7 @@ export class UsuarioComponent {
       .then((result) => {
         this.verificarEmail();
         console.log(result.user)
-        this.route.navigate(['/']);
+        this.route.navigate(['/layout/dashboard']);
         this.usuarioService.salvar(usuario).then(result => {
           this.showSuccessMessages = true;
           console.log(result);
@@ -135,14 +136,29 @@ export class UsuarioComponent {
 
   selectFile(event: any) {
     console.log(event);
-    console.log(event.target.files[0]);
     const file = event.target.files[0];
+
+    if (!file) {
+      this.formGroup.controls.arquivo.setErrors({ required: true });
+      return;
+    }
 
     this.usuarioService.uploadImagem(file).then(result => {
       console.log(result);
       result.ref.getDownloadURL().then(url => {
         this.formGroup.controls.imagem.patchValue(url);
+        this.formGroup.controls.arquivo.setErrors(null);
+        this.formGroup.controls.arquivo.markAsTouched();
       })
     });
+  }
+
+  private formataData(data: string): string {
+    const d = new Date(data);
+    const utcString = d.toISOString();
+    const utcDate = new Date(utcString);
+    const mes = `0${utcDate.getUTCMonth() + 1}`.slice(-2);
+    const dia = `0${utcDate.getUTCDate()}`.slice(-2);
+    return `${dia}/${mes}/${utcDate.getUTCFullYear()}`;
   }
 }

@@ -1,14 +1,27 @@
 <div class="container">
-    <h1>Pedidos</h1>
-    <div>
-      <label for="nomeUsuario">Nome do Usuário:</label>
-      <input type="text" id="nomeUsuario" [(ngModel)]="nomeUsuario" />
-    </div>
-    <div *ngFor="let jogo of jogos">
-      <h2>{{ jogo.nome }}</h2>
-      <p>Preço: {{ jogo.preco }}</p>
-      <p>Quantidade: {{ jogo.quantidade }}</p>
-      <button (click)="alugar(jogo)">Alugar</button>
+  <h1>Carrinho de Compras</h1>
+  <div *ngIf="carrinho.length === 0">
+    <p>O carrinho está vazio.</p>
+  </div>
+  <div *ngFor="let jogo of carrinho">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img [src]="jogo.imagem" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ jogo.nome }}</h5>
+            <p class="card-text">Preço: R$ {{ jogo.preco }}</p>
+            <p class="card-text">Quantidade: {{ jogo.quantidade }}</p>
+            <button class="btn btn-danger" (click)="removerDoCarrinho(jogo)">Remover do Carrinho</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
+  <div class="mt-3">
+    <button class="btn btn-primary me-2" (click)="continuarAlugando()">Continuar Alugando</button>
+    <button class="btn btn-success" (click)="finalizarPedido()">Finalizar Pedido</button>
+  </div>
+</div>

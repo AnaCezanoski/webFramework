@@ -23,7 +23,7 @@ export class LoginComponent {
         .signInWithEmailAndPassword(this.login.value!, this.password.value!)
         .then((result) => {
           console.log(result.user);
-          this.router.navigate(['/']);
+          this.router.navigate(['/layout/dashboard']);
         })
         .catch((error) => {
           console.log(error);

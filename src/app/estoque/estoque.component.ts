@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { JogoModel } from '../jogo/model/jogo.model';
 import { JogoService } from '../jogo/service/jogo.service';
-import { error } from 'console';
-import { ActivatedRoute,Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estoque',

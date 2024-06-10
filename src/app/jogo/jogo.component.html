@@ -9,8 +9,8 @@
     <br>
     <div class="container">
         <form [formGroup]="formGroup"> 
-            <div class="row">
-                <div class="col-sm-6">
+            <div class="row g-2">
+                <div class="col-sm-8">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" 
                 placeholder="Digite o nome do jogo"
@@ -21,10 +21,10 @@
                 </div>
             </div>
             <br>
-            <div class="col-sm-6">
+            <div class="col-sm">
                 <label for="quantidade" class="form-label">Quantidade Disponível</label>
                 <input type="number" class="form-control" id="quantidade" 
-                placeholder="Digite a quantidade disponível"
+                placeholder="Digite a quantidade"
                 formControlName="quantidade">
                 <div class="invalid-feedback"
                 [style.display]="formGroup.controls.quantidade.invalid
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-            <div class="row">
+            <div class="row g-2">
                 <div class="col-sm-6">
                     <label for="preco" class="form-label">Preço</label>
                     <div class="input-group">
@@ -72,12 +72,12 @@
             <br>
             <div class="col-sm">
                 <div class="mb-3">
-                    <label for="imagem" class="form-label">Imagem</label>
-                    <input type="file" class="form-control" id="imagem" (change)="selectFile($event)"
-                    formControlName="imagem">
+                    <label for="arquivo" class="form-label">Imagem</label>
+                    <input type="file" class="form-control" id="arquivo" (change)="selectFile($event)" formControlName="arquivo">
+                    <input type="hidden" formControlName="imagem">
                     <div class="invalid-feedback"
-                    [style.display]="formGroup.controls.imagem.invalid
-                    && formGroup.controls.imagem.touched ? 'block' : 'none'">Selecione uma imagem.
+                    [style.display]="formGroup.controls.arquivo.invalid
+                    && formGroup.controls.arquivo.touched ? 'block' : 'none'">Selecione uma imagem.
                     </div>
                 </div>
             </div>
@@ -87,4 +87,4 @@
             </div>
         </form>
     </div>
-    </body>
+</body>

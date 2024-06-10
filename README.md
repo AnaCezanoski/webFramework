@@ -1,6 +1,6 @@
 # BoardLend
 
-BoardLend é uma aplicação para gerenciar aluguel de jogos de tabuleiro. Este projeto é desenvolvido em Angular e usa Firebase para backend e armazenamento.
+BoardLend é uma aplicação para gerenciar aluguel de jogos de. Este projeto é desenvolvido em Angular e usa Firebase para back-end e armazenamento.
 
 ## Requisitos
 

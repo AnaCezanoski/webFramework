@@ -1,6 +1,6 @@
-# BoardLend
+![image 1](https://github.com/AnaCezanoski/webFramework/blob/main/assets/images/boardlend-removebg-preview.png)
 
-BoardLend é uma aplicação para gerenciar aluguel de jogos de. Este projeto é desenvolvido em Angular e usa Firebase para back-end e armazenamento.
+BoardLend é uma aplicação web para gerenciar o aluguel de jogos de tabuleiro. Este projeto é desenvolvido em Angular e usa Firebase para back-end e armazenamento.
 
 ## Requisitos
 
@@ -34,3 +34,4 @@ git clone `https://github.com/AnaCezanoski/webFramework.git`
 ### 5. Execute o projeto
 - Execute `npm start` no terminal e acesse `http://localhost:4200` para abrir a aplicação automaticamente na web.
 
+![image 2](https://github.com/AnaCezanoski/webFramework/blob/main/assets/images/cartas-removebg-preview.png) ![image 3](https://github.com/AnaCezanoski/webFramework/blob/main/assets/images/xadrez-removebg-preview.png)
